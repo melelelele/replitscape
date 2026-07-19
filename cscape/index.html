@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CodeScape: Das Programmierquiz</title>
+
+    <link rel="stylesheet" href="reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="reveal.js/dist/theme/black.css">
+    <link rel="stylesheet" href="story-styles/cscape-story.css">
+
+    <style>
+        body.theme-code {
+            --page-bg: #05070a;
+            --font-main: system-ui, sans-serif;
+            --font-display: system-ui, sans-serif;
+
+            --scene-bg-url: linear-gradient(135deg, #08111f, #020305);
+            --scene-overlay: radial-gradient(circle at top left, rgba(72, 149, 239, 0.22), transparent 34%),
+            linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.42));
+            --scene-vignette: radial-gradient(circle at center, transparent 45%, rgba(0, 0, 0, 0.58));
+
+            --speaker-x: 3vw;
+            --speaker-bottom: 24vh;
+            --speaker-width: min(24vw, 300px);
+            --speaker-bg: rgba(10, 18, 32, 0.9);
+            --speaker-border: #4cc9f0;
+            --speaker-border-right: #80ffdb;
+            --speaker-radius: 18px;
+            --speaker-shadow: 0 18px 52px rgba(0, 0, 0, 0.55);
+
+            --dialogue-left: 3vw;
+            --dialogue-right: 3vw;
+            --dialogue-bottom: 3vh;
+            --dialogue-min-height: 18vh;
+            --dialogue-max-height: 34vh;
+            --dialogue-bg: rgba(7, 13, 24, 0.96);
+            --dialogue-border: rgba(76, 201, 240, 0.58);
+            --dialogue-radius: 18px;
+            --dialogue-shadow: 0 18px 54px rgba(0, 0, 0, 0.46);
+
+            --name-color: #4cc9f0;
+            --text-color: #edf6f9;
+            --objective-color: #80ffdb;
+            --task-bg: rgba(128, 255, 219, 0.09);
+            --task-border: rgba(128, 255, 219, 0.5);
+            --task-color: #e6fff8;
+
+            --name-size: clamp(0.75rem, 1.1vw, 0.98rem);
+            --text-size: clamp(0.95rem, 1.45vw, 1.32rem);
+            --task-size: clamp(0.78rem, 1.05vw, 1rem);
+
+            --video-character-width: min(38vw, 520px);
+            --video-character-height: 90vh;
+            --video-character-bottom: 4vh;
+            --video-character-side-offset: 5vw;
+            --video-task-width: min(76vw, 980px);
+            --video-task-bottom: 4vh;
+
+            --hybrid-character-width: min(34vw, 500px);
+            --hybrid-character-height: 90vh;
+        }
+
+        body.theme-code .text {
+            line-height: 1.45;
+        }
+
+        body.theme-code .task,
+        body.theme-code .video-task {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+            font-weight: 700;
+        }
+
+        body.theme-code .code-panel {
+            position: absolute;
+            z-index: 4;
+            top: 4vh;
+            right: 4vw;
+            width: min(42vw, 640px);
+            padding: 1rem 1.1rem;
+            box-sizing: border-box;
+            color: #caffbf;
+            background: rgba(2, 6, 12, 0.82);
+            border: 2px solid rgba(76, 201, 240, 0.45);
+            border-radius: 16px;
+            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+            font-size: clamp(0.7rem, 1vw, 0.95rem);
+            line-height: 1.45;
+            white-space: pre-wrap;
+        }
+
+        body.theme-code .scene-final .dialogue {
+            border-color: rgba(128, 255, 219, 0.8);
+            box-shadow: 0 18px 54px rgba(0, 0, 0, 0.5),
+            0 0 42px rgba(128, 255, 219, 0.16);
+        }
+
+        body.theme-code .audio-hint {
+            background: rgba(7, 13, 24, 0.96);
+            color: #edf6f9;
+            border-color: rgba(76, 201, 240, 0.7);
+        }
+
+        @media (max-width: 900px) {
+            body.theme-code .code-panel {
+                display: none;
+            }
+        }
+        body.theme-code .link-setup-panel {
+            position: absolute;
+            z-index: 7;
+            left: 50%;
+            top: 12vh;
+            width: min(78vw, 820px);
+            box-sizing: border-box;
+            padding: 1rem;
+            transform: translateX(-50%);
+            color: #edf6f9;
+            background: rgba(7, 13, 24, 0.96);
+            border: 2px solid rgba(128, 255, 219, 0.55);
+            border-radius: 16px;
+            box-shadow: 0 18px 54px rgba(0, 0, 0, 0.48);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        }
+
+        body.theme-code .link-setup-panel label {
+            display: block;
+            margin-bottom: 0.55rem;
+            color: #80ffdb;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+        }
+
+        body.theme-code .link-setup-panel input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.85rem 0.9rem;
+            color: #edf6f9;
+            background: #020812;
+            border: 2px solid rgba(76, 201, 240, 0.5);
+            border-radius: 10px;
+            font: inherit;
+            outline: none;
+        }
+
+        body.theme-code .link-setup-panel input:focus {
+            border-color: #80ffdb;
+        }
+
+        body.theme-code .link-setup-panel button {
+            margin-top: 0.8rem;
+            padding: 0.75rem 1rem;
+            color: #031018;
+            background: #80ffdb;
+            border: none;
+            border-radius: 10px;
+            font: inherit;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        body.theme-code .link-setup-message {
+            margin-top: 0.75rem;
+            min-height: 1.2em;
+            color: #caffbf;
+        }
+
+        body.theme-code .link-setup-message.is-error {
+            color: #ffadad;
+        }
+    </style>
+</head>
+
+<body class="theme-code">
+<div class="reveal">
+    <div class="slides">
+        <section data-layout="dialogue"
+                 data-speaker="SYSTEM"
+                 data-side="left"
+                 data-dialogue="Willkommen bei CodeScape. Bevor das Quiz startet, muss ich wissen, welches Replit-Projekt geprüft werden soll."
+                 data-task="Trage unten den Replit-Link ein. Du kannst die Basis-URL oder direkt die /status-URL verwenden."
+                 data-audio-1-type="tts"
+                 data-audio-1-phase="start"
+                 data-audio-1-text-from="dialogue"
+                 data-audio-1-voice="de-DE-KatjaNeural">
+            <div class="scene">
+                <div class="code-panel">Beispiel:
+
+                    https://dein-projekt.dein-user.replit.app/status
+
+                    oder:
+
+                    https://dein-projekt.dein-user.replit.app</div>
+
+                <form class="link-setup-panel" id="replitLinkForm">
+                    <label for="replitStatusUrl">Replit-Projektlink</label>
+                    <input id="replitStatusUrl"
+                           name="replitStatusUrl"
+                           type="url"
+                           placeholder="https://dein-projekt.dein-user.replit.app/status"
+                           autocomplete="off"
+                           required>
+                    <button type="submit">Link speichern</button>
+                    <div class="link-setup-message" id="replitLinkMessage"></div>
+                </form>
+            </div>
+        </section>
+        <section data-layout="dialogue"
+                 data-cscape-check="check_replit_url_done"
+                 data-speaker="TEST-RUNNER"
+                 data-side="right"
+                 data-dialogue="Verbindung hergestellt. Das Replit-Projekt antwortet korrekt und der Teststatus ist erreichbar."
+                 data-task="Jetzt beginnt das Programmierquiz."
+                 data-after-ready-delay="2"
+                 data-ready-sound="sounds/bells.mp3"
+                 data-ready-sound-volume="0.65"
+                 data-audio-1-type="tts"
+                 data-audio-1-phase="start"
+                 data-audio-1-text-from="dialogue"
+                 data-audio-1-voice="de-DE-ConradNeural">
+            <div class="scene">
+                <div class="code-panel">Status-API erkannt:
+
+                    q1
+                    q2
+                    q3
+                    all</div>
+            </div>
+        </section>
+        <section data-layout="dialogue"
+                 data-speaker="SYSTEM"
+                 data-side="left"
+                 data-dialogue="Willkommen bei CodeScape. In diesem Escape Room reparierst du drei kleine Python-Funktionen in einem gemeinsamen Coding-Projekt."
+                 data-task="Öffne das Replit-Projekt der Spielleitung. Danach geht es los."
+                 data-after-ready-delay="2"
+                 data-audio-1-type="tts"
+                 data-audio-1-phase="start"
+                 data-audio-1-text-from="dialogue"
+                 data-audio-1-voice="de-DE-KatjaNeural">
+            <div class="scene">
+                <div class="code-panel">quiz.py
+
+                    def greet(name):
+                    return ""
+
+                    def add(a, b):
+                    return 0
+
+                    def is_even(number):
+                    return False</div>
+            </div>
+        </section>
+
+        <section data-layout="dialogue"
+                 data-speaker="SYSTEM"
+                 data-side="left"
+                 data-dialogue="Aufgabe eins: Die Funktion greet soll eine Person begrüßen. Sie bekommt einen Namen und soll daraus einen vollständigen Satz bauen."
+                 data-task='Repariere greet(name), sodass greet("Ada") genau "Hallo, Ada!" zurückgibt.'
+                 data-audio-1-type="tts"
+                 data-audio-1-phase="start"
+                 data-audio-1-text-from="dialogue"
+                 data-audio-1-voice="de-DE-KatjaNeural">
+            <div class="scene">
+                <div class="code-panel">Aufgabe 1
+
+                    def greet(name):
+                    return ""
+
+                    Erwartet:
+                    greet("Ada")   → "Hallo, Ada!"
+                    greet("Linus") → "Hallo, Linus!"</div>
+            </div>
+        </section>
+
+        <section data-layout="dialogue"
+                 data-cscape-check="check_q1_done"
+                 data-speaker="TEST-RUNNER"
+                 data-side="right"
+                 data-dialogue="Test eins bestanden. Deine Begrüßungsfunktion liefert jetzt genau den erwarteten Text."
+                 data-task=""
+                 data-after-ready-delay="2"
+                 data-ready-sound="sounds/bells.mp3"
+                 data-ready-sound-volume="0.65"
+                 data-audio-1-type="tts"
+                 data-audio-1-phase="start"
+                 data-audio-1-text-from="dialogue"
+                 data-audio-1-voice="de-DE-ConradNeural">
+            <div class="scene">
+                <div class="code-panel">Status:
+                    q1 = bestanden
+
+                    Nächster Schritt:
+                    add(a, b)</div>
+            </div>
+        </section>
+
+        <section data-layout="dialogue"
+                 data-speaker="SYSTEM"
+                 data-side="left"
+                 data-dialogue="Aufgabe zwei: Jetzt brauchst du eine kleine Rechenfunktion. Die Funktion add bekommt zwei Zahlen und soll ihre Summe zurückgeben."
+                 data-task="Repariere add(a, b), sodass die Funktion für positive, negative und leere Summen korrekt funktioniert."
+                 data-audio-1-type="tts"
+                 data-audio-1-phase="start"
+                 data-audio-1-text-from="dialogue"
+                 data-audio-1-voice="de-DE-KatjaNeural">
+            <div class="scene">
+                <div class="code-panel">Aufgabe 2
+
+                    def add(a, b):
+                    return 0
+
+                    Erwartet:
+                    add(2, 3)    → 5
+                    add(-4, 10)  → 6
+                    add(0, 0)    → 0</div>
+            </div>
+        </section>
+
+        <section data-layout="dialogue"
+                 data-cscape-check="check_q2_done"
+                 data-speaker="TEST-RUNNER"
+                 data-side="right"
+                 data-dialogue="Test zwei bestanden. Deine Additionsfunktion rechnet jetzt korrekt."
+                 data-task=""
+                 data-after-ready-delay="2"
+                 data-ready-sound="sounds/bells.mp3"
+                 data-ready-sound-volume="0.65"
+                 data-audio-1-type="tts"
+                 data-audio-1-phase="start"
+                 data-audio-1-text-from="dialogue"
+                 data-audio-1-voice="de-DE-ConradNeural">
+            <div class="scene">
+                <div class="code-panel">Status:
+                    q1 = bestanden
+                    q2 = bestanden
+
+                    Nächster Schritt:
+                    is_even(number)</div>
+            </div>
+        </section>
+
+        <section data-layout="dialogue"
+                 data-speaker="SYSTEM"
+                 data-side="left"
+                 data-dialogue="Aufgabe drei: Prüfe, ob eine Zahl gerade ist. Die Funktion is_even soll True zurückgeben, wenn die Zahl gerade ist, sonst False."
+                 data-task="Repariere is_even(number). Tipp: Der Modulo-Operator % hilft dir."
+                 data-audio-1-type="tts"
+                 data-audio-1-phase="start"
+                 data-audio-1-text-from="dialogue"
+                 data-audio-1-voice="de-DE-KatjaNeural">
+            <div class="scene">
+                <div class="code-panel">Aufgabe 3
+
+                    def is_even(number):
+                    return False
+
+                    Erwartet:
+                    is_even(2) → True
+                    is_even(7) → False
+                    is_even(0) → True</div>
+            </div>
+        </section>
+
+        <section data-layout="dialogue"
+                 data-cscape-check="check_q3_done"
+                 data-speaker="TEST-RUNNER"
+                 data-side="right"
+                 data-dialogue="Test drei bestanden. Die Gerade-Ungerade-Prüfung funktioniert."
+                 data-task=""
+                 data-after-ready-delay="2"
+                 data-ready-sound="sounds/bells.mp3"
+                 data-ready-sound-volume="0.65"
+                 data-audio-1-type="tts"
+                 data-audio-1-phase="start"
+                 data-audio-1-text-from="dialogue"
+                 data-audio-1-voice="de-DE-ConradNeural">
+            <div class="scene">
+                <div class="code-panel">Status:
+                    q1 = bestanden
+                    q2 = bestanden
+                    q3 = bestanden
+
+                    Finaler Check läuft...</div>
+            </div>
+        </section>
+
+        <section data-layout="dialogue"
+                 data-cscape-check="check_all_done"
+                 data-speaker="SYSTEM"
+                 data-side="left"
+                 data-dialogue="Alle Tests sind grün. Du hast das Programmierquiz gelöst und den Escape Room abgeschlossen."
+                 data-task="Geschafft: greet, add und is_even funktionieren korrekt."
+                 data-stop-music="true"
+                 data-audio-1-type="tts"
+                 data-audio-1-phase="start"
+                 data-audio-1-text-from="dialogue"
+                 data-audio-1-voice="de-DE-KatjaNeural"
+                 data-audio-2-src="sounds/bells.mp3"
+                 data-audio-2-phase="after-text"
+                 data-audio-2-volume="0.75">
+            <div class="scene scene-final">
+                <div class="code-panel">pytest-style status:
+
+                    q1  passed
+                    q2  passed
+                    q3  passed
+
+                    ESCAPE COMPLETE</div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<script src="reveal.js/dist/reveal.js"></script>
+<script src="revealjs-cscape.js"></script>
+
+<script>
+    window.CSCAPE_STORY = {
+        blockNavigationUntilReady: true,
+
+        ttsUrl: "http://localhost:8765/tts",
+        defaultVoice: "de-DE-KatjaNeural",
+        defaultTtsRate: "+0%",
+        defaultTtsPitch: "+0Hz",
+
+        defaultBackground: "",
+        defaultMusic: "",
+        musicVolume: 0.22,
+        soundVolume: 0.82,
+
+        typeSpeed: 24,
+        defaultLayout: "dialogue",
+        defaultTextMode: "type",
+
+        audioHintText: "Klick für Sound & Stimmen",
+
+        formatText(text) {
+            return String(text || "");
+        }
+    };
+</script>
+
+<script src="story-styles/cscape-story.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        window.CSCAPE_STORY_API.init();
+
+        Reveal.initialize({
+            hash: false,
+            controls: false,
+            progress: false,
+            transition: "none",
+            center: false,
+            keyboard: {
+                27: () => alert("Close with Ctrl+W"),
+                83: null
+            },
+            plugins: [
+                RevealCscape
+            ]
+        });
+    });
+</script>
+<script>
+    (() => {
+        function normalizeStatusUrl(rawValue) {
+            let url = String(rawValue || "").trim();
+
+            if (!url) return "";
+
+            if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                url = "https://" + url;
+            }
+
+            if (!url.replace(/\/+$/, "").endsWith("/status")) {
+                url = url.replace(/\/+$/, "") + "/status";
+            }
+
+            return url;
+        }
+
+        async function storeReplitUrl(statusUrl) {
+            const response = await fetch("http://localhost:5000/game_data_store", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    replit_status_url: statusUrl
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Store request failed with HTTP ${response.status}`);
+            }
+
+            return response.json();
+        }
+
+        async function testStatusUrl(statusUrl) {
+            const separator = statusUrl.includes("?") ? "&" : "?";
+            const response = await fetch(statusUrl + separator + "cachebust=" + Date.now(), {
+                cache: "no-store"
+            });
+
+            if (!response.ok) {
+                throw new Error(`Status URL antwortet mit HTTP ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            const requiredKeys = ["q1", "q2", "q3", "all"];
+            const missingKeys = requiredKeys.filter(key => !(key in data));
+
+            if (missingKeys.length > 0) {
+                throw new Error(`Status JSON enthält nicht: ${missingKeys.join(", ")}`);
+            }
+
+            return data;
+        }
+
+        function setupReplitLinkForm() {
+            const form = document.getElementById("replitLinkForm");
+            const input = document.getElementById("replitStatusUrl");
+            const message = document.getElementById("replitLinkMessage");
+
+            if (!form || !input || !message) return;
+
+            form.addEventListener("submit", async event => {
+                event.preventDefault();
+
+                message.classList.remove("is-error");
+                message.textContent = "Prüfe Link...";
+
+                const statusUrl = normalizeStatusUrl(input.value);
+
+                if (!statusUrl) {
+                    message.classList.add("is-error");
+                    message.textContent = "Bitte trage einen Replit-Link ein.";
+                    return;
+                }
+
+                try {
+                    await testStatusUrl(statusUrl);
+                    await storeReplitUrl(statusUrl);
+
+                    message.classList.remove("is-error");
+                    message.textContent = "Link gespeichert. Du kannst jetzt zur nächsten Folie wechseln.";
+
+                    input.value = statusUrl;
+                } catch (error) {
+                    console.error("[CodeScape] Replit link setup failed:", error);
+                    message.classList.add("is-error");
+                    message.textContent = error.message || "Der Link konnte nicht geprüft werden.";
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", setupReplitLinkForm);
+    })();
+</script>
+</body>
+</html>
