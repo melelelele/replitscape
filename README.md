@@ -182,13 +182,7 @@ Danach liefert `/status`:
 
 ## CScape lokal starten
 
-Wechsle lokal in den CScape-Ordner:
-
-```bash
-cd ~/Dokumente/GitHub/repos/replitscape/cscape
-```
-
-Starte CScape:
+Wechsle lokal in den CScape-Ordner und starte CScape:
 
 ```bash
 ./run.sh
@@ -198,6 +192,12 @@ Alternativ aus dem übergeordneten Repository-Ordner:
 
 ```bash
 ./cscape/run.sh
+```
+
+Falls zusätzlich dynamische Sprachausgabe genutzt wird:
+
+```bash
+python3 tts_server.py
 ```
 
 Öffne anschließend:
