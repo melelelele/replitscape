@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<rect width="512" height="512" rx="96" fill="#14071c"/>
+<path d="M142 183l-40-44m268 44 40-44M121 266H67m378 0h-54M145 350l-42 42m264-42 42 42" stroke="#ff4d6d" stroke-width="18" stroke-linecap="round"/>
+<ellipse cx="256" cy="267" rx="145" ry="132" fill="#2a0d3c" stroke="#ff4d6d" stroke-width="12"/>
+<path d="M167 205c25-35 53-53 89-53s64 18 89 53" fill="none" stroke="#ff9f1c" stroke-width="16"/>
+<circle cx="207" cy="257" r="22" fill="#ff9f1c"/><circle cx="305" cy="257" r="22" fill="#ff9f1c"/>
+<path d="M184 324c22-12 42-18 61-18 24 0 48 8 83 28" fill="none" stroke="#fff0f5" stroke-width="13" stroke-linecap="round"/>
+<path d="M232 90l24-38 24 38-24 38z" fill="#80ffdb"/>
+<text x="256" y="452" text-anchor="middle" fill="#fff0f5" font-family="system-ui" font-size="38" font-weight="800">BUG-BYTE</text>
+</svg>

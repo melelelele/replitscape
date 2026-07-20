@@ -1,101 +1,114 @@
 # CodeScape: Programmierquiz mit Replit
 
-Dieser Escape Room ist ein minimaler CScape-Raum, bei dem die Spielerinnen und Spieler kleine Programmieraufgaben in einem gemeinsamen Replit-Projekt lösen. CScape läuft lokal als Regiemodul und fragt regelmäßig eine Status-URL des Replit-Projekts ab. Sobald ein Test in Replit erfolgreich ist, wird die nächste Folie im Escape Room freigeschaltet.
+Dieses Repository enthält das vorbereitete Replit-Projekt für einen kleinen CScape-Escape-Room.
 
-## Idee des Escape Rooms
+Die Spielenden bearbeiten in Replit die Datei `quiz.py`. Ein Flask-Server führt die Tests aus und stellt den aktuellen Status unter `/status` als JSON bereit. CScape fragt diese URL regelmäßig ab und schaltet nach korrekt gelösten Aufgaben die passenden Folien frei.
 
-Die Spielenden arbeiten an einer Datei `quiz.py`. Dort sind drei Funktionen vorbereitet:
+## Projektstruktur
 
-```python
-def greet(name):
-    return ""
+```text
+replit-setup/
+├── quiz.py
+├── tests.py
+├── server.py
+├── requirements.txt
+├── .replit
+├── .gitignore
+└── README.md
+```
+## Anmelden
+melde dich bei Replit an. Verwende oder erstelle dabei am besten einen Account, hinter dem keine kritischen Zahlungsinformationen oder andere Daten hinterlegt sind, da dieser Account den Spielenden zur Verfügung gestellt werden muss.
+## Replit-Projekt importieren
 
+Für dieses öffentliche GitHub-Repository kann der direkte Replit-Import verwendet werden:
 
-def add(a, b):
-    return 0
-
-
-def is_even(number):
-    return False
+```text
+https://replit.com/github.com/melelelele/replit-setup
 ```
 
-Die Aufgaben sind bewusst klein gehalten:
+Alternativ:
 
-1. `greet(name)` soll einen Namen begrüßen.
-2. `add(a, b)` soll zwei Zahlen addieren.
-3. `is_even(number)` soll prüfen, ob eine Zahl gerade ist.
+1. Öffne `https://replit.com/import`.
+2. Wähle **GitHub**.
+3. Füge diese Repository-URL ein:
 
-Ein kleiner Flask-Server in Replit stellt unter `/status` den aktuellen Teststatus als JSON bereit. CScape liest diese URL aus und prüft dadurch, ob die einzelnen Aufgaben gelöst sind.
+   ```text
+   https://github.com/melelelele/replit-setup
+   ```
 
-Beispiel für `/status`:
+4. Klicke auf **Import**.
+
+Replit importiert die Dateien, Ordner, Abhängigkeiten und die übliche Startkonfiguration des Repositorys.
+
+## Server in Replit starten
+
+Klicke nach dem Import auf **Run**.
+
+Der konfigurierte Startbefehl lautet:
+
+```bash
+python server.py
+```
+
+Falls Replit die Abhängigkeiten nicht automatisch installiert, führe in der Replit-Shell aus:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Starte danach erneut:
+
+```bash
+python server.py
+```
+
+Der Server verwendet Port `3000`.
+
+## Status-URL ermitteln
+
+Wenn der Server läuft, zeigt Replit eine öffentliche Webansicht beziehungsweise Web-URL an.
+
+Ergänze diese URL um:
+
+```text
+/status
+```
+
+Beispiel:
+
+```text
+https://deine-app.replit.dev/status
+```
+
+Die Antwort sollte am Anfang ungefähr so aussehen:
 
 ```json
 {
-  "q1": true,
-  "q2": false,
-  "q3": false,
   "all": false,
-  "errors": []
+  "errors": [],
+  "q1": false,
+  "q2": false,
+  "q3": false
 }
 ```
 
-## Architektur
+Diese vollständige `/status`-URL wird in CScape eingetragen.
+
+### Wichtig
+
+Verwende nicht die Editor-URL:
 
 ```text
-Spielende / Regie
-        │
-        ▼
-Replit-Projekt
-├── quiz.py       # wird von den Spielenden bearbeitet
-├── tests.py      # prüft die Aufgaben
-└── server.py     # stellt /status bereit
-        │
-        ▼
-CScape lokal
-
+https://replit.com/@user/projektname
 ```
 
-Der Replit-Link wird nicht fest in `game.py` eingetragen. Stattdessen fragt die erste Folie in der Story nach der Replit-URL und speichert sie im CScape-Store.
+Verwende die öffentliche Web-URL des laufenden Servers mit `/status`.
 
-## Lokales CScape vorbereiten
+## Aufgaben für die Spielenden
 
-Wechsle in den replit Ordner:
+Die Spielenden bearbeiten `quiz.py`.
 
-```bash
-cd ~/Dokumente/GitHub/cscaperooms/replit/cscape
-```
-
-Starte dort wie gewohnt CScape.
-
-Öffne danach im Browser:
-
-```text
-http://localhost:5000
-```
-
-
-## Replit-Projekt erstellen
-
-### 1. Replit öffnen
-
-Öffne Replit im Browser, melde dich an und erstelle ein neues Python-Projekt. Verwende dafür am Besten einen Account, der extra für diesen Zweck erstellt wurde, nicht eine wichtige E-Mail-Adresse von dir verwendet und keine Zahlungsinformationen hinterlegt hat, wenn Studierende den Escaperoom unbeaufsichtigt spielen sollen, um dich zu schützen.
-
-### 2. Dateien in Replit anlegen
-
-Lege diese Dateien an:
-
-```text
-quiz.py
-tests.py
-server.py
-.replit
-```
-
-Falls `.replit` nicht sichtbar ist, aktiviere in der Dateiliste die Anzeige versteckter Dateien.
-
-## Replit-Datei: `quiz.py`
-
-Diese Datei bearbeiten die Spielenden.
+Zu Beginn enthält die Datei:
 
 ```python
 def greet(name):
@@ -116,197 +129,31 @@ def is_even(number):
     return False
 ```
 
-## Replit-Datei: `tests.py`
+Die Aufgaben sind:
 
-Diese Datei enthält die Tests. Die Spielenden sollten diese Datei normalerweise nicht bearbeiten.
+1. `greet(name)` soll `Hallo, <name>!` zurückgeben.
+2. `add(a, b)` soll die Summe von `a` und `b` zurückgeben.
+3. `is_even(number)` soll `True` für gerade und `False` für ungerade Zahlen zurückgeben.
 
-```python
-import quiz
+Der Server lädt `quiz.py` bei jeder Anfrage an `/status` neu. Normalerweise ist nach einer Änderung kein Neustart erforderlich.
 
+## Tests manuell ausführen
 
-def run_tests():
-    results = {
-        "q1": False,
-        "q2": False,
-        "q3": False,
-        "all": False,
-        "errors": []
-    }
-
-    try:
-        results["q1"] = (
-            quiz.greet("Ada") == "Hallo, Ada!"
-            and quiz.greet("Linus") == "Hallo, Linus!"
-        )
-    except Exception as error:
-        results["errors"].append(f"q1: {type(error).__name__}: {error}")
-
-    try:
-        results["q2"] = (
-            quiz.add(2, 3) == 5
-            and quiz.add(-4, 10) == 6
-            and quiz.add(0, 0) == 0
-        )
-    except Exception as error:
-        results["errors"].append(f"q2: {type(error).__name__}: {error}")
-
-    try:
-        results["q3"] = (
-            quiz.is_even(2) is True
-            and quiz.is_even(7) is False
-            and quiz.is_even(0) is True
-        )
-    except Exception as error:
-        results["errors"].append(f"q3: {type(error).__name__}: {error}")
-
-    results["all"] = results["q1"] and results["q2"] and results["q3"]
-    return results
-
-
-if __name__ == "__main__":
-    print(run_tests())
-```
-
-## Replit-Datei: `server.py`
-
-Diese Datei startet den Flask-Server und stellt `/status` bereit.
-
-```python
-from flask import Flask, jsonify
-from flask_cors import CORS
-import importlib
-import tests
-import quiz
-
-app = Flask(__name__)
-CORS(app)
-
-
-@app.get("/")
-def index():
-    return """
-    <h1>CodeScape Quiz Server</h1>
-    <p>Open <a href="/status">/status</a> to see the current test status.</p>
-    """
-
-
-@app.get("/status")
-def status():
-    try:
-        importlib.reload(quiz)
-        importlib.reload(tests)
-
-        response = jsonify(tests.run_tests())
-        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
-        response.headers["Pragma"] = "no-cache"
-        response.headers["Expires"] = "0"
-        return response
-
-    except Exception as error:
-        response = jsonify({
-            "q1": False,
-            "q2": False,
-            "q3": False,
-            "all": False,
-            "errors": [f"{type(error).__name__}: {error}"]
-        })
-        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
-        return response
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3000)
-```
-
-## Replit-Datei: `.replit`
-
-Diese Datei legt fest, was beim Start ausgeführt wird.
-
-```toml
-run = "python server.py"
-```
-
-Falls in `.replit` bereits andere Inhalte stehen, sollte mindestens der `run`-Eintrag auf `python server.py` zeigen.
-
-## Flask in Replit installieren
-
-Öffne in Replit die Shell und installiere:
+In der Replit-Shell:
 
 ```bash
-pip install flask flask-cors
+python tests.py
 ```
 
-
-## Replit-Server starten
-
-Starte in Replit entweder über den Start-/Run-Button oder in der Shell:
-
-```bash
-python server.py
-```
-
-Wenn der Server läuft, erscheint in der Shell ungefähr:
+Am Anfang sollte ungefähr Folgendes erscheinen:
 
 ```text
-Running on http://127.0.0.1:3000
-Running on http://0.0.0.0:3000
+{'q1': False, 'q2': False, 'q3': False, 'all': False, 'errors': []}
 ```
 
-Replit zeigt außerdem einen Hinweis, dass Port `3000` geöffnet wurde. Klicke auf den angezeigten Replit-Link.
+## Richtige Lösung
 
-Öffne dann:
-
-```text
-DEINE-REPLIT-WEB-URL/status
-```
-
-Du solltest JSON sehen, zum Beispiel:
-
-```json
-{
-  "all": false,
-  "errors": [],
-  "q1": false,
-  "q2": false,
-  "q3": false
-}
-```
-
-Diese `/status`-URL ist die URL, die du in CScape am Anfang einträgst.
-
-Wichtig: Nicht die Editor-URL eintragen.
-
-Falsch:
-
-```text
-https://replit.com/@user/Quiz-Status?replId=...
-```
-
-Richtig:
-
-```text
-https://irgendeine-replit-web-url.replit.dev/status
-```
-
-oder:
-
-```text
-https://quiz-status.user.replit.app/status
-```
-
-## CScape mit Replit verbinden
-
-1. Starte lokal CScape.
-2. Öffne `http://localhost:5000`.
-3. Auf der ersten Folie erscheint ein Eingabefeld für den Replit-Link.
-4. Trage die `/status`-URL ein.
-5. Klicke auf „Link speichern“.
-6. CScape prüft, ob die URL JSON mit den Keys `q1`, `q2`, `q3` und `all` liefert.
-7. Wenn die Verbindung stimmt, wird die nächste Folie freigeschaltet.
-
-## Richtige Lösung für das Quiz
-
-Die Spielenden sollen im Verlauf ungefähr diese Lösung erreichen:
+Die vollständige Lösung lautet:
 
 ```python
 def greet(name):
@@ -321,7 +168,7 @@ def is_even(number):
     return number % 2 == 0
 ```
 
-Danach sollte `/status` so aussehen:
+Danach liefert `/status`:
 
 ```json
 {
@@ -332,37 +179,83 @@ Danach sollte `/status` so aussehen:
   "q3": true
 }
 ```
-## Spielbetrieb
 
-Für den Spielbetrieb empfiehlt sich:
-- Der Spielleiter erstellt das Replit-Projekt wie oben beschrieben.
-- Der Spielleiter startet CScape auf einem Raspberry Pi oder einem anderen Computer.
-- Der Spielleiter trägt in CScape die Replit-Status-URL ein.
-- Die Spielenden bearbeiten die quiz.py-Datei entsprechend der cscape-Story.
-- CScape läuft weiter und prüft automatisch die Aufgaben.
-- Nach jeder korrekt gelösten Aufgabe schaltet CScape die passende Erfolgsfolie frei.
+## CScape lokal starten
 
-## Erweiterungsmöglichkeiten
+Wechsle lokal in den CScape-Ordner:
 
-Du kannst später weitere Aufgaben ergänzen, indem du:
+```bash
+cd ~/Dokumente/GitHub/repos/replitscape/cscape
+```
 
-1. Eine neue Funktion in `quiz.py` anlegst.
-2. Einen neuen Test in `tests.py` ergänzt.
-3. Im JSON einen neuen Key ergänzt, zum Beispiel `q4`.
-4. In `game.py` eine neue Check-Funktion anlegst, zum Beispiel `check_q4_done`.
-5. In `index.html` eine neue CScape-Folie mit `data-cscape-check="check_q4_done"` ergänzt.
+Starte CScape:
 
+```bash
+./run.sh
+```
 
-## Kurzfassung
+Alternativ aus dem übergeordneten Repository-Ordner:
+
+```bash
+./cscape/run.sh
+```
+
+Öffne anschließend:
 
 ```text
-Replit:
-- quiz.py wird bearbeitet
-- tests.py prüft Aufgaben
-- server.py stellt /status bereit
-
-CScape:
-- erste Folie speichert Replit-/status-URL
-- game.py fragt /status ab
-- Slides werden durch check_q1_done, check_q2_done, check_q3_done und check_all_done freigeschaltet
+http://localhost:5000
 ```
+
+Auf der ersten Folie:
+
+1. die vollständige Replit-`/status`-URL eintragen,
+2. auf **Link speichern** klicken,
+3. anschließend `quiz.py` in Replit bearbeiten.
+
+## Architektur
+
+```text
+Spielende
+    │
+    ▼
+Replit-Projekt
+├── quiz.py       # wird von den Spielenden bearbeitet
+├── tests.py      # prüft die Aufgaben
+└── server.py     # stellt /status bereit
+    │
+    ▼
+CScape lokal
+```
+
+## Bedeutung der Dateien
+
+### `quiz.py`
+
+Enthält die Aufgaben, die von den Spielenden bearbeitet werden.
+
+### `tests.py`
+
+Prüft die drei Funktionen und liefert für jede Aufgabe einen booleschen Status.
+
+### `server.py`
+
+Startet den Flask-Server und stellt `/status` bereit.
+
+### `requirements.txt`
+
+Enthält die Python-Abhängigkeiten:
+
+```text
+Flask
+flask-cors
+```
+
+### `.replit`
+
+Legt den Startbefehl fest:
+
+```toml
+run = "python server.py"
+```
+## Eigene Aufgaben
+Um eigene, weitere Aufgaben zu erstellen, muss das GitHub-Repository github.com/melelelele/replit-setup geforkt und bearbeitet werden. Neue Aufgaben werden in quiz.py erstellt und entsprechende Tests werden in der test.py geschrieben. Der Status der Tests kann wie gewohnt in der game.py abgefragt werden und somit neue Slides in der index.html getriggert werden.

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<rect width="512" height="512" rx="96" fill="#07150f"/>
+<rect x="108" y="115" width="296" height="270" rx="48" fill="#0d2b20" stroke="#80ffdb" stroke-width="12"/>
+<rect x="150" y="165" width="212" height="132" rx="18" fill="#03110c"/>
+<path d="M176 211l24 24 42-50m20 50h72" fill="none" stroke="#80ffdb" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M176 262l24 24 42-50m20 50h72" fill="none" stroke="#80ffdb" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="180" cy="340" r="13" fill="#80ffdb"/><circle cx="220" cy="340" r="13" fill="#4cc9f0"/>
+<text x="256" y="452" text-anchor="middle" fill="#e7fff8" font-family="system-ui" font-size="34" font-weight="800">TEST-RUNNER</text>
+</svg>

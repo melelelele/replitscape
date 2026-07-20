@@ -109,6 +109,7 @@
                 display: none;
             }
         }
+
         body.theme-code .link-setup-panel {
             position: absolute;
             z-index: 7;
@@ -178,6 +179,7 @@
 <div class="reveal">
     <div class="slides">
         <section data-layout="dialogue"
+                 data-avatar="pics/nova.svg"
                  data-speaker="SYSTEM"
                  data-side="left"
                  data-dialogue="Willkommen bei CodeScape. Bevor das Quiz startet, muss ich wissen, welches Replit-Projekt geprüft werden soll."
@@ -187,14 +189,6 @@
                  data-audio-1-text-from="dialogue"
                  data-audio-1-voice="de-DE-KatjaNeural">
             <div class="scene">
-                <div class="code-panel">Beispiel:
-
-                    https://dein-projekt.dein-user.replit.app/status
-
-                    oder:
-
-                    https://dein-projekt.dein-user.replit.app</div>
-
                 <form class="link-setup-panel" id="replitLinkForm">
                     <label for="replitStatusUrl">Replit-Projektlink</label>
                     <input id="replitStatusUrl"
@@ -209,6 +203,7 @@
             </div>
         </section>
         <section data-layout="dialogue"
+                 data-avatar="pics/nova.svg"
                  data-cscape-check="check_replit_url_done"
                  data-speaker="TEST-RUNNER"
                  data-side="right"
@@ -227,10 +222,12 @@
                     q1
                     q2
                     q3
-                    all</div>
+                    all
+                </div>
             </div>
         </section>
         <section data-layout="dialogue"
+                 data-avatar="pics/nova.svg"
                  data-speaker="SYSTEM"
                  data-side="left"
                  data-dialogue="Willkommen bei CodeScape. In diesem Escape Room reparierst du drei kleine Python-Funktionen in einem gemeinsamen Coding-Projekt."
@@ -250,11 +247,13 @@
                     return 0
 
                     def is_even(number):
-                    return False</div>
+                    return False
+                </div>
             </div>
         </section>
 
         <section data-layout="dialogue"
+                 data-avatar="pics/nova.svg"
                  data-speaker="SYSTEM"
                  data-side="left"
                  data-dialogue="Aufgabe eins: Die Funktion greet soll eine Person begrüßen. Sie bekommt einen Namen und soll daraus einen vollständigen Satz bauen."
@@ -270,12 +269,14 @@
                     return ""
 
                     Erwartet:
-                    greet("Ada")   → "Hallo, Ada!"
-                    greet("Linus") → "Hallo, Linus!"</div>
+                    greet("Ada") → "Hallo, Ada!"
+                    greet("Linus") → "Hallo, Linus!"
+                </div>
             </div>
         </section>
 
         <section data-layout="dialogue"
+                 data-avatar="pics/nova.svg"
                  data-cscape-check="check_q1_done"
                  data-speaker="TEST-RUNNER"
                  data-side="right"
@@ -293,11 +294,13 @@
                     q1 = bestanden
 
                     Nächster Schritt:
-                    add(a, b)</div>
+                    add(a, b)
+                </div>
             </div>
         </section>
 
         <section data-layout="dialogue"
+                 data-avatar="pics/nova.svg"
                  data-speaker="SYSTEM"
                  data-side="left"
                  data-dialogue="Aufgabe zwei: Jetzt brauchst du eine kleine Rechenfunktion. Die Funktion add bekommt zwei Zahlen und soll ihre Summe zurückgeben."
@@ -313,13 +316,15 @@
                     return 0
 
                     Erwartet:
-                    add(2, 3)    → 5
-                    add(-4, 10)  → 6
-                    add(0, 0)    → 0</div>
+                    add(2, 3) → 5
+                    add(-4, 10) → 6
+                    add(0, 0) → 0
+                </div>
             </div>
         </section>
 
         <section data-layout="dialogue"
+                 data-avatar="pics/nova.svg"
                  data-cscape-check="check_q2_done"
                  data-speaker="TEST-RUNNER"
                  data-side="right"
@@ -338,11 +343,13 @@
                     q2 = bestanden
 
                     Nächster Schritt:
-                    is_even(number)</div>
+                    is_even(number)
+                </div>
             </div>
         </section>
 
         <section data-layout="dialogue"
+                 data-avatar="pics/nova.svg"
                  data-speaker="SYSTEM"
                  data-side="left"
                  data-dialogue="Aufgabe drei: Prüfe, ob eine Zahl gerade ist. Die Funktion is_even soll True zurückgeben, wenn die Zahl gerade ist, sonst False."
@@ -360,11 +367,13 @@
                     Erwartet:
                     is_even(2) → True
                     is_even(7) → False
-                    is_even(0) → True</div>
+                    is_even(0) → True
+                </div>
             </div>
         </section>
 
         <section data-layout="dialogue"
+                 data-avatar="pics/nova.svg"
                  data-cscape-check="check_q3_done"
                  data-speaker="TEST-RUNNER"
                  data-side="right"
@@ -383,11 +392,13 @@
                     q2 = bestanden
                     q3 = bestanden
 
-                    Finaler Check läuft...</div>
+                    Finaler Check läuft...
+                </div>
             </div>
         </section>
 
         <section data-layout="dialogue"
+                 data-avatar="pics/nova.svg"
                  data-cscape-check="check_all_done"
                  data-speaker="SYSTEM"
                  data-side="left"
@@ -404,11 +415,12 @@
             <div class="scene scene-final">
                 <div class="code-panel">pytest-style status:
 
-                    q1  passed
-                    q2  passed
-                    q3  passed
+                    q1 passed
+                    q2 passed
+                    q3 passed
 
-                    ESCAPE COMPLETE</div>
+                    ESCAPE COMPLETE
+                </div>
             </div>
         </section>
 
