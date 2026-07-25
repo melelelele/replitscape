@@ -1,24 +1,16 @@
-# CodeScape: Programmierquiz mit Replit
+# ReplitScape: Programmierquiz mit Replit
 
-Dieses Repository enthält das vorbereitete Replit-Projekt für einen kleinen CScape-Escape-Room.
+Dieses Repository enthält einen kleinen CScape-Room in Python mit Replit.
 
 Die Spielenden bearbeiten in Replit die Datei `quiz.py`. Ein Flask-Server führt die Tests aus und stellt den aktuellen Status unter `/status` als JSON bereit. CScape fragt diese URL regelmäßig ab und schaltet nach korrekt gelösten Aufgaben die passenden Folien frei.
 
-## Projektstruktur
+## Vorbereitungen für den Spieler-PC
 
-```text
-replit-setup/
-├── quiz.py
-├── tests.py
-├── server.py
-├── requirements.txt
-├── .replit
-├── .gitignore
-└── README.md
-```
-## Anmelden
+### Anmelden
 melde dich bei Replit an. Verwende oder erstelle dabei am besten einen Account, hinter dem keine kritischen Zahlungsinformationen oder andere Daten hinterlegt sind, da dieser Account den Spielenden zur Verfügung gestellt werden muss.
-## Replit-Projekt importieren
+
+### Replit-Projekt importieren
+Die Beispieldateien für diesen Escaperoom befinden sich in [diesem Repository](https://github.com/melelelele/replit-setup).
 
 Für dieses öffentliche GitHub-Repository kann der direkte Replit-Import verwendet werden:
 
@@ -64,7 +56,7 @@ python server.py
 
 Der Server verwendet Port `3000`.
 
-## Status-URL ermitteln
+### Status-URL ermitteln
 
 Wenn der Server läuft, zeigt Replit eine öffentliche Webansicht beziehungsweise Web-URL an.
 
@@ -94,7 +86,7 @@ Die Antwort sollte am Anfang ungefähr so aussehen:
 
 Diese vollständige `/status`-URL wird in CScape eingetragen.
 
-### Wichtig
+#### Wichtig
 
 Verwende nicht die Editor-URL:
 
@@ -104,7 +96,7 @@ https://replit.com/@user/projektname
 
 Verwende die öffentliche Web-URL des laufenden Servers mit `/status`.
 
-## Aufgaben für die Spielenden
+### Aufgaben für die Spielenden
 
 Die Spielenden bearbeiten `quiz.py`.
 
@@ -180,19 +172,13 @@ Danach liefert `/status`:
 }
 ```
 
-## CScape lokal starten
-
-Wechsle lokal in den CScape-Ordner und starte CScape:
+## Setup für den Raspberry-Pi
+Klone dieses Repository auf dem Pi und wechsle lokal in den CScape-Ordner und starte CScape wie gewohnt:
 
 ```bash
 ./run.sh
 ```
 
-Alternativ aus dem übergeordneten Repository-Ordner:
-
-```bash
-./cscape/run.sh
-```
 
 Falls zusätzlich dynamische Sprachausgabe genutzt wird:
 
@@ -212,22 +198,9 @@ Auf der ersten Folie:
 2. auf **Link speichern** klicken,
 3. anschließend `quiz.py` in Replit bearbeiten.
 
-## Architektur
 
-```text
-Spielende
-    │
-    ▼
-Replit-Projekt
-├── quiz.py       # wird von den Spielenden bearbeitet
-├── tests.py      # prüft die Aufgaben
-└── server.py     # stellt /status bereit
-    │
-    ▼
-CScape lokal
-```
 
-## Bedeutung der Dateien
+## Bedeutung der Dateien in Replit
 
 ### `quiz.py`
 
@@ -259,3 +232,6 @@ run = "python server.py"
 ```
 ## Eigene Aufgaben
 Um eigene, weitere Aufgaben zu erstellen, muss das GitHub-Repository github.com/melelelele/replit-setup geforkt und bearbeitet werden. Neue Aufgaben werden in quiz.py erstellt und entsprechende Tests werden in der test.py geschrieben. Der Status der Tests kann wie gewohnt in der game.py abgefragt werden und somit neue Slides in der index.html getriggert werden.
+
+## Hinweis
+Dieser Escape-Room verwendet die Story-Styles-Erweiterung für Cscape. Das ist eine Erweiterung, die einen Text-Adventure-Like Escaperoom ermöglicht. Für genaue Details zur Verwendung und Funktion [klicke hier](https://github.com/melelelele/story-styles).
