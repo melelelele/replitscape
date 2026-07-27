@@ -1,3 +1,4 @@
-
-/cscape/.venv
-/cscape/__pycache__
+build/
+.server-build/
+*.class
+.replit.nix

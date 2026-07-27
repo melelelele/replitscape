@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>JavaScape: Die Teemaschine</title>
+    <link href="reveal.js/dist/reset.css" rel="stylesheet"/>
+    <link href="reveal.js/dist/reveal.css" rel="stylesheet"/>
+    <link href="reveal.js/dist/theme/black.css" rel="stylesheet"/>
+    <link href="story-styles/cscape-story.css" rel="stylesheet"/>
+    <style>
+        body.theme-coffee {
+            --page-bg: #18110c;
+            --font-main: system-ui, sans-serif;
+            --font-display: Georgia, serif;
+            --scene-bg-url: url("pics/background.jpeg");
+            --scene-overlay: linear-gradient(
+                    90deg,
+                    rgba(18, 10, 5, 0.22),
+                    rgba(18, 10, 5, 0.05) 48%,
+                    rgba(18, 10, 5, 0.26)
+            );
+            --scene-vignette: radial-gradient(
+                    circle at center,
+                    transparent 48%,
+                    rgba(18, 9, 4, 0.56)
+            );
+
+            --speaker-x: 3vw;
+            --speaker-bottom: 24vh;
+            --speaker-width: min(24vw, 320px);
+            --speaker-bg: rgba(52, 31, 19, 0.94);
+            --speaker-border: #d6a86e;
+            --speaker-border-right: #f1d4a8;
+            --speaker-radius: 20px;
+            --speaker-shadow: 0 20px 60px rgba(0, 0, 0, 0.58);
+
+            --dialogue-left: 3vw;
+            --dialogue-right: 3vw;
+            --dialogue-bottom: 3vh;
+            --dialogue-min-height: 18vh;
+            --dialogue-max-height: 38vh;
+            --dialogue-bg: rgba(37, 23, 15, 0.96);
+            --dialogue-border: rgba(214, 168, 110, 0.72);
+            --dialogue-radius: 20px;
+            --dialogue-shadow: 0 20px 58px rgba(0, 0, 0, 0.52);
+
+            --name-color: #f3c77f;
+            --text-color: #fff7e9;
+            --objective-color: #f3c77f;
+            --task-bg: rgba(255, 247, 233, 0.10);
+            --task-border: rgba(243, 199, 127, 0.72);
+            --task-color: #fff7e9;
+
+            --name-size: clamp(0.76rem, 1.1vw, 1rem);
+            --text-size: clamp(0.95rem, 1.42vw, 1.3rem);
+            --task-size: clamp(0.72rem, 1.08vw, 1rem);
+        }
+
+        body.theme-coffee .text {
+            line-height: 1.45;
+        }
+
+        body.theme-coffee .task {
+            margin-top: 0.8rem;
+            padding: 0.75rem 0.9rem;
+            border-width: 1px;
+            border-style: solid;
+            border-radius: 12px;
+            line-height: 1.35;
+            font-weight: 650;
+        }
+
+        body.theme-coffee .task:empty {
+            display: none !important;
+        }
+
+        body.theme-coffee .audio-hint {
+            background: rgba(37, 23, 15, 0.96);
+            color: #fff7e9;
+            border-color: #d6a86e;
+        }
+
+        body.theme-coffee .scene-final .dialogue {
+            border-color: rgba(245, 223, 183, 0.92);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.56),
+            0 0 45px rgba(243, 199, 127, 0.20);
+        }
+    </style>
+    ```
+
+</head>
+<body class="theme-coffee">
+<div class="reveal">
+    <div class="slides">
+        <section data-after-ready-delay="2" data-audio-1-phase="before-text" data-audio-1-src="sounds/kaffee.mp3"
+                 data-audio-1-volume="0.72" data-audio-2-phase="start" data-audio-2-pitch="+25Hz"
+                 data-audio-2-rate="+8%" data-audio-2-volume="0.82"
+                 data-audio-2-text-from="dialogue" data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural" data-avatar="pics/coffee.png"
+                 data-dialogue="Systemstart. Gerätetyp: Teekanne. Häää?? Ich dachte immer, ich wäre eine Kaffeemaschine..."
+                 data-layout="dialogue" data-music="sounds/background.mp3" data-music-volume="0.16"
+                 data-side="left" data-speaker="KAFFEEMASCHINE??">
+            <div class="scene"></div>
+        </section>
+
+        ```
+        <section data-after-ready-delay="2" data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/kaffee.mp3" data-audio-1-volume="0.72"
+                 data-audio-1-blocking="true"
+                 data-audio-2-phase="after-text"
+                 data-audio-2-src="sounds/coffee-machine.mp3"
+                 data-audio-2-type="sound" data-audio-2-volume="0.70"
+                 data-audio-2-blocking="true"
+                 data-audio-3-phase="start" data-audio-3-pitch="+25Hz"
+                 data-audio-3-rate="+8%" data-audio-3-volume="0.82"
+                 data-audio-3-text-from="dialogue" data-audio-3-type="tts"
+                 data-audio-3-voice="de-DE-ConradNeural"
+                 data-avatar="pics/coffee.png"
+                 data-dialogue="Meine verbundenen Komponenten sind ein Wassererhitzer und eine Teedose. In der Teedose befindet sich Kamillentee. Na dann mach ich mich wohl mal an die Arbeit....."
+                 data-layout="dialogue" data-side="left" data-speaker="TEEMASCHINE">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2" data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/professor.mp3"
+                 data-audio-1-volume="0.75" data-audio-2-phase="start"
+                 data-audio-2-pitch="-5Hz" data-audio-2-rate="+45%"
+                 data-audio-2-text-from="dialogue" data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/nullpointer.png"
+                 data-dialogue="KAMILLENTEE? Ich hatte heute noch KEINEN Kaffee. Noch ein Becher davon und ich dekompiliere dieses Gerät eigenhändig."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="PROFESSOR NULLPOINTER">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2" data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/luna.mp3"
+                 data-audio-1-volume="0.70" data-audio-2-phase="start"
+                 data-audio-2-pitch="+17Hz" data-audio-2-rate="+12%"
+                 data-audio-2-text-from="dialogue" data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-KatjaNeural"
+                 data-avatar="pics/luna.png"
+                 data-dialogue="Vielleicht wurde die Maschine nur nie gefragt, was sie sein möchte. Kamillentee ist außerdem eine Einladung, langsamer zu werden."
+                 data-layout="dialogue" data-side="left"
+                 data-speaker="LUNA MONDSCHEIN">
+            <div class="scene"></div>
+        </section>
+        <section data-after-ready-delay="2"  data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/professor.mp3"
+                 data-audio-1-volume="0.75"
+                 data-audio-2-phase="start" data-audio-2-pitch="-4Hz"
+                 data-audio-2-rate="+38%" data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/nullpointer.png"
+                 data-dialogue="Woher kommen Sie denn jetzt auf einmal? Sie haben mir ja wirklich gerade noch gefehlt. Sie haben ja nicht einmal Schuhe an??"
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="PROFESSOR NULLPOINTER">
+            <div class="scene"></div>
+        </section>
+        <section data-after-ready-delay="2" data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/luna.mp3"
+                 data-audio-1-volume="0.70" data-audio-2-phase="start"
+                 data-audio-2-pitch="+17Hz" data-audio-2-rate="+12%"
+                 data-audio-2-text-from="dialogue" data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-KatjaNeural"
+                 data-avatar="pics/luna.png"
+                 data-dialogue="Ich bin Luna Mondschein. Eigentlich studiere ich Philosophie im 18. Semester, aber morgens lustwandle ich gerne durch die Fakultäten. Und ja, gelegentlich auch barfuß. So hat es mich in diese Teeküche verschlagen."
+                 data-layout="dialogue" data-side="left"
+                 data-speaker="LUNA MONDSCHEIN">
+            <div class="scene"></div>
+        </section>
+        <section data-after-ready-delay="2"   data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/professor.mp3"
+                 data-audio-1-volume="0.75"
+                 data-audio-2-phase="start" data-audio-2-pitch="-4Hz"
+                 data-audio-2-rate="+38%" data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/nullpointer.png"
+                 data-dialogue="Wie dem auch sei, so genau interessiert mich das gar nicht. Vor allem nicht vor meinem ersten Kaffee. Ich habe heute 3 Vorlesungen und 20 Korrekturen, ohne Kaffee bin ich verloren!! Ein Lasttest stand definitiv nicht auf der Agenda!"
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="PROFESSOR NULLPOINTER">
+            <div class="scene"></div>
+        </section>
+        <section data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/professor.mp3"
+                 data-audio-1-volume="0.75"
+                 data-audio-2-phase="start" data-audio-2-pitch="-4Hz"
+                 data-audio-2-rate="+38%" data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/nullpointer.png"
+                 data-dialogue=" Eine Kaffeemaschine braucht Zugriff auf eine Kaffeedose, nicht auf eine Teedose."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="PROFESSOR NULLPOINTER"
+                 data-task="Öffne src/Kaffeedose.java. Implementiere entnehmen(), sodass die gespeicherten Kaffeebohnen zurückgegeben werden."
+                 data-wait-for-task="true" data-wait-key="q1">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2" data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/kaffee.mp3"
+                 data-audio-1-volume="0.72" data-audio-1-blocking="true"
+                 data-audio-2-phase="after-text"
+                 data-audio-2-src="sounds/coffee-machine.mp3"
+                 data-audio-2-type="sound" data-audio-2-volume="0.70"
+                 data-audio-2-blocking="true"
+                 data-audio-3-phase="start" data-audio-3-pitch="+25Hz"
+                 data-audio-3-rate="+8%" data-audio-3-volume="0.82"
+                 data-audio-3-text-from="dialogue" data-audio-3-type="tts"
+                 data-audio-3-voice="de-DE-ConradNeural"
+                 data-avatar="pics/coffee-happy.png"
+                 data-cscape-check="check_q1_done"
+                 data-dialogue="Kaffeedose erreichbar. Ich habe Kaffeebohnen gefunden. Ich gieße jetzt das heiße Wasser darüber."
+                 data-layout="dialogue" data-side="left"
+                 data-speaker="KAFFEEMASCHINE">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2" data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/kaffee.mp3"
+                 data-audio-1-volume="0.72"
+                 data-audio-2-phase="start" data-audio-2-pitch="+25Hz"
+                 data-audio-2-rate="+8%" data-audio-2-volume="0.82"
+                 data-audio-2-text-from="dialogue" data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/coffee.png"
+                 data-dialogue="Versuch abgeschlossen. Aber in der Tasse schwimmen ganze Bohnen..."
+                 data-layout="dialogue" data-side="left"
+                 data-speaker="KAFFEEMASCHINE">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2" data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/luna.mp3"
+                 data-audio-1-volume="0.70"
+                 data-audio-2-phase="start" data-audio-2-pitch="+17Hz"
+                 data-audio-2-rate="+12%"
+                 data-audio-2-text-from="dialogue" data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-KatjaNeural"
+                 data-avatar="pics/luna.png"
+                 data-dialogue="Vielleicht besitzen die Bohnen einfach gern ihre natürliche Form. Wir sollten uns alle nicht in eine Form pressen lassen, nur damit wir geliebt werden."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="LUNA MONDSCHEIN">
+            <div class="scene"></div>
+        </section>
+
+        <section data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/professor.mp3"
+                 data-audio-1-volume="0.75"
+                 data-audio-2-phase="start" data-audio-2-pitch="-4Hz"
+                 data-audio-2-rate="+38%"
+                 data-audio-2-text-from="dialogue" data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/nullpointer.png"
+                 data-dialogue="Die Bohnen brauchen keine Selbstverwirklichung. Sie brauchen ein Mahlwerk."
+                 data-layout="dialogue" data-side="left"
+                 data-speaker="PROFESSOR NULLPOINTER"
+                 data-task="Öffne src/Mahlwerk.java. Erzeuge aus den Kaffeebohnen ein GemahlenerKaffee-Objekt und gib es zurück."
+                 data-wait-for-task="true" data-wait-key="q2">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/kaffee.mp3"
+                 data-audio-1-volume="0.72"
+                 data-audio-1-blocking="true"
+                 data-audio-2-phase="before-text"
+                 data-audio-2-src="sounds/coffee-machine-grind.mp3"
+                 data-audio-2-type="sound"
+                 data-audio-2-volume="0.70"
+                 data-audio-2-blocking="true"
+                 data-audio-3-phase="start"
+                 data-audio-3-pitch="+25Hz"
+                 data-audio-3-rate="+8%"
+                 data-audio-3-volume="0.82"
+                 data-audio-3-text-from="dialogue"
+                 data-audio-3-type="tts"
+                 data-audio-3-voice="de-DE-ConradNeural"
+                 data-avatar="pics/coffee-happy.png"
+                 data-cscape-check="check_q2_done"
+                 data-dialogue="Das Mahlwerk funktioniert. Die Bohnen haben ihre natürliche Form verloren und riechen jetzt auch erstaunlich überzeugend."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="KAFFEEMASCHINE">
+            <div class="scene"></div>
+        </section>
+
+        <section data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/kaffee.mp3"
+                 data-audio-1-volume="0.72"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="+25Hz"
+                 data-audio-2-rate="+8%"
+                 data-audio-2-volume="0.82"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/coffee.png"
+                 data-dialogue="Kaffeedose, Mahlwerk und Wassererhitzer sind bereit. Trotzdem kann ich noch keinen Espresso herstellen."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="KAFFEEMASCHINE"
+                 data-task="Öffne src/Kaffeemaschine.java. Implementiere espresso() mit Kaffeedose, Mahlwerk und Wassererhitzer."
+                 data-wait-for-task="true" data-wait-key="q3">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/kaffee.mp3"
+                 data-audio-1-volume="0.72"
+                 data-audio-1-blocking="true"
+                 data-audio-2-phase="before-text"
+                 data-audio-2-src="sounds/coffee-machine-full.mp3"
+                 data-audio-2-type="sound"
+                 data-audio-2-volume="0.70"
+                 data-audio-2-blocking="true"
+                 data-audio-3-phase="start"
+                 data-audio-3-pitch="+25Hz"
+                 data-audio-3-rate="+8%"
+                 data-audio-3-volume="0.82"
+                 data-audio-3-text-from="dialogue"
+                 data-audio-3-type="tts"
+                 data-audio-3-voice="de-DE-ConradNeural"
+                 data-avatar="pics/coffee-happy.png"
+                 data-cscape-check="check_q3_done"
+                 data-dialogue="Espresso erfolgreich hergestellt. Habe ich das wirklich gemacht? Ich glaube, ich bin tatsächlich eine Kaffeemaschine."
+                 data-layout="dialogue" data-side="left"
+                 data-speaker="KAFFEEMASCHINE">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/professor.mp3"
+                 data-audio-1-volume="0.75"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="-2Hz"
+                 data-audio-2-rate="+27%"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/nullpointer.png"
+                 data-dialogue="Endlich. Ein Espresso. Das System lebt. Jetzt bin ich schon wieder eingeschränkt zurechnungsfähig."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="PROFESSOR NULLPOINTER">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/luna.mp3"
+                 data-audio-1-volume="0.70"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="+17Hz"
+                 data-audio-2-rate="+12%"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-KatjaNeural"
+                 data-avatar="pics/luna.png"
+                 data-dialogue="Ich hätte gern einen Cappuccino. Die Milch darf dabei lernen, durch Luft leichter zu werden."
+                 data-layout="dialogue" data-side="left"
+                 data-speaker="LUNA MONDSCHEIN">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/professor.mp3"
+                 data-audio-1-volume="0.75"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="-4Hz"
+                 data-audio-2-rate="+38%"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/nullpointer.png"
+                 data-dialogue="Wenn ich anmerken darf, ich bin zwar kein Physik-Professor, aber die Milch in Ihrer Tasse wiegt aufgeschäumt noch genauso viel."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="PROFESSOR NULLPOINTER">
+            <div class="scene"></div>
+        </section>
+
+        <section data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/kaffee.mp3"
+                 data-audio-1-volume="0.72"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="+25Hz"
+                 data-audio-2-rate="+8%"
+                 data-audio-2-volume="0.82"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/coffee.png"
+                 data-dialogue="Mein Milchaufschäumer ist verbunden, aber er produziert noch keinen Milchschaum."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="KAFFEEMASCHINE"
+                 data-task="Öffne src/Milchaufschaeumer.java. Erzeuge aus der Milch ein Milchschaum-Objekt und gib es zurück."
+                 data-wait-for-task="true" data-wait-key="q4">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/luna.mp3"
+                 data-audio-1-volume="0.70"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="+17Hz"
+                 data-audio-2-rate="+12%"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-KatjaNeural"
+                 data-avatar="pics/luna.png"
+                 data-cscape-check="check_q4_done"
+                 data-dialogue="Siehst du? Die Milch musste nur Luft und Raum in ihr Leben lassen."
+                 data-layout="dialogue" data-side="left"
+                 data-speaker="LUNA MONDSCHEIN">
+            <div class="scene"></div>
+        </section>
+
+        <section data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/professor.mp3"
+                 data-audio-1-volume="0.75"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="-4Hz"
+                 data-audio-2-rate="+38%"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/nullpointer.png"
+                 data-dialogue="Bitte nicht weiter analysieren, ich habe genug. Jetzt fehlt nur noch der Cappuccino."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="PROFESSOR NULLPOINTER"
+                 data-task="Öffne src/Kaffeemaschine.java. Implementiere cappuccino() aus Espresso und Milchschaum."
+                 data-wait-for-task="true" data-wait-key="q5">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/kaffee.mp3"
+                 data-audio-1-volume="0.72"
+                 data-audio-1-blocking="true"
+                 data-audio-2-phase="before-text"
+                 data-audio-2-src="sounds/coffee-machine-full.mp3"
+                 data-audio-2-type="sound"
+                 data-audio-2-volume="0.70"
+                 data-audio-2-blocking="true"
+                 data-audio-3-phase="start"
+                 data-audio-3-pitch="+25Hz"
+                 data-audio-3-rate="+8%"
+                 data-audio-3-volume="0.82"
+                 data-audio-3-text-from="dialogue"
+                 data-audio-3-type="tts"
+                 data-audio-3-voice="de-DE-ConradNeural"
+                 data-avatar="pics/coffee-happy.png"
+                 data-cscape-check="check_q5_done"
+                 data-dialogue="Cappuccino erfolgreich hergestellt. Espresso und Cappuccino funktionieren. Keines der Getränke enthält Kamille. Das ist gut."
+                 data-layout="dialogue" data-side="left"
+                 data-speaker="KAFFEEMASCHINE">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/kaffee.mp3"
+                 data-audio-1-volume="0.72"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="+25Hz"
+                 data-audio-2-rate="+8%"
+                 data-audio-2-volume="0.82"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/coffee.png"
+                 data-dialogue="Meine Funktionen sind repariert. Beim nächsten Neustart werde ich jedoch weiterhin als Teekanne initialisiert."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="KAFFEEMASCHINE">
+            <div class="scene"></div>
+        </section>
+
+        <section  data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/professor.mp3"
+                 data-audio-1-volume="0.75"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="-4Hz"
+                 data-audio-2-rate="+38%"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/nullpointer.png"
+                 data-dialogue="Das Küchen-Setup muss jetzt endgültig repariert werden."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="PROFESSOR NULLPOINTER"
+                 data-task="Öffne src/KuechenSetup.java. Initialisiere eine Kaffeemaschine mit Kaffeedose, Mahlwerk, Wassererhitzer und Milchaufschäumer."
+                 data-wait-for-task="true" data-wait-key="q6">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/kaffee.mp3"
+                 data-audio-1-volume="0.72"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="+25Hz"
+                 data-audio-2-rate="+8%"
+                 data-audio-2-volume="0.82"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/coffee-happy.png"
+                 data-cscape-check="check_q6_done"
+                 data-dialogue="Neustart abgeschlossen. Gerätetyp: Kaffeemaschine. Kaffeedose verbunden. Mahlwerk verbunden. Wassererhitzer verbunden. Milchaufschäumer verbunden."
+                 data-layout="dialogue" data-side="left"
+                 data-speaker="KAFFEEMASCHINE">
+            <div class="scene scene-final"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/kaffee.mp3"
+                 data-audio-1-volume="0.72"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="+25Hz"
+                 data-audio-2-rate="+8%"
+                 data-audio-2-volume="0.82"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/coffee-happy.png"
+                 data-dialogue="Ich weiß jetzt, wer ich bin, und ich kann Espresso und Cappuccino zubereiten. Professor Nullpointer, darf ich noch einen Espresso machen?"
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="KAFFEEMASCHINE">
+            <div class="scene scene-final"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/professor.mp3"
+                 data-audio-1-volume="0.75"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="-2Hz"
+                 data-audio-2-rate="+27%"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/nullpointer.png"
+                 data-dialogue="Zwei."
+                 data-layout="dialogue" data-side="left"
+                 data-speaker="PROFESSOR NULLPOINTER">
+            <div class="scene scene-final"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/luna.mp3"
+                 data-audio-1-volume="0.70"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="+17Hz"
+                 data-audio-2-rate="+12%"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-KatjaNeural"
+                 data-avatar="pics/luna.png"
+                 data-dialogue="Und für mich bitte Kamillentee."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="LUNA MONDSCHEIN">
+            <div class="scene scene-final"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/kaffee.mp3"
+                 data-audio-1-volume="0.72"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="+25Hz"
+                 data-audio-2-rate="+8%"
+                 data-audio-2-volume="0.82"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/coffee-happy.png"
+                 data-dialogue="Kamillentee ist in diesem Gerät nicht mehr verfügbar."
+                 data-layout="dialogue" data-side="left"
+                 data-speaker="KAFFEEMASCHINE">
+            <div class="scene scene-final"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/professor.mp3"
+                 data-audio-1-volume="0.75"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="-2Hz"
+                 data-audio-2-rate="+27%"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/nullpointer.png"
+                 data-dialogue="Besser ist es."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="PROFESSOR NULLPOINTER"
+                 data-stop-music="true">
+            <div class="scene scene-final"></div>
+        </section>
+    </div>
+    ```
+
+</div>
+
+<script src="reveal.js/dist/reveal.js"></script>
+
+<script src="revealjs-cscape.js"></script>
+
+<script>
+    window.CSCAPE_STORY = {
+        blockNavigationUntilReady: true,
+
+        ttsUrl: "http://localhost:8765/tts",
+        defaultVoice: "de-DE-KatjaNeural",
+        defaultTtsRate: "+24%",
+        defaultTtsPitch: "+0Hz",
+
+        defaultBackground: "pics/background.jpeg",
+        defaultMusic: "sounds/background.mp3",
+        musicVolume: 0.16,
+        musicLoop: true,
+        soundVolume: 0.82,
+
+        typeSpeed: 12,
+        defaultLayout: "dialogue",
+        defaultTextMode: "type",
+
+        audioHintText: "Klick für Musik, Sounds & Stimmen",
+
+        formatText(text) {
+            return String(text || "");
+        }
+    };
+</script>
+
+<script src="story-styles/cscape-story.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        window.CSCAPE_STORY_API.init();
+
+        await Reveal.initialize({
+            hash: false,
+            controls: false,
+            progress: false,
+            transition: "none",
+            center: false,
+
+            keyboard: false,
+            touch: false,
+            mouseWheel: false,
+
+            plugins: [
+                RevealCscape
+            ]
+        });
+
+        const LOCAL_STATUS_URL = "http://127.0.0.1:5001/status";
+        const POLL_INTERVAL_MS = 3000;
+
+        let advancing = false;
+        let pollInProgress = false;
+
+        async function fetchJavaStatus() {
+            const separator = LOCAL_STATUS_URL.includes("?") ? "&" : "?";
+
+            const response = await fetch(
+                LOCAL_STATUS_URL + separator + "cachebust=" + Date.now(),
+                {
+                    cache: "no-store",
+                    headers: {
+                        "Cache-Control": "no-cache"
+                    }
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error(
+                    `Status-Bridge antwortet mit HTTP ${response.status}`
+                );
+            }
+
+            const status = await response.json();
+
+            if (!status || typeof status !== "object") {
+                throw new Error(
+                    "Status-Bridge lieferte kein JSON-Objekt."
+                );
+            }
+
+            return status;
+        }
+
+        async function checkCurrentTask() {
+            if (advancing || pollInProgress) {
+                return;
+            }
+
+            const currentSlide = Reveal.getCurrentSlide();
+            const waitKey = currentSlide?.dataset?.waitKey;
+
+            if (!waitKey) {
+                return;
+            }
+
+            pollInProgress = true;
+
+            try {
+                const status = await fetchJavaStatus();
+
+                if (status[waitKey] === true) {
+                    advancing = true;
+
+                    window.setTimeout(() => {
+                        Reveal.next();
+                    }, 700);
+                }
+            } catch (error) {
+
+                console.warn(
+                    "[JavaScape] Aufgabenprüfung fehlgeschlagen:",
+                    error.message
+                );
+            } finally {
+                pollInProgress = false;
+            }
+        }
+
+        Reveal.on("slidechanged", () => {
+            advancing = false;
+            window.setTimeout(checkCurrentTask, 500);
+        });
+
+        window.setTimeout(checkCurrentTask, 700);
+        window.setInterval(checkCurrentTask, POLL_INTERVAL_MS);
+
+
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape") {
+                alert("Close with Ctrl+W");
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
