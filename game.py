@@ -1,4 +1,5 @@
 import json
+import configparser
 import threading
 import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -7,14 +8,12 @@ from urllib.parse import urlparse
 import requests
 import cscape
 
-
+config = configparser.ConfigParser()
+config.read("config.ini")
 class Game:
     title = "JavaScape: Die Teemaschine"
 
-    # Vor dem Start durch die öffentliche Replit-/status-URL ersetzen.
-    # Beispiel:
-    # REPLIT_STATUS_URL = "https://dein-projekt.replit.dev/status"
-    REPLIT_STATUS_URL = "https://b88df828-7049-4108-9125-fe184f74bb0d-00-3n18xbp83rtvn.spock.replit.dev/status"
+    REPLIT_STATUS_URL = config["replit"]["status_url"]
 
     STATUS_KEYS = ("q1", "q2", "q3", "q4", "q5", "q6", "all")
 
@@ -43,9 +42,9 @@ class Game:
     def get_status(self):
         status_url = self.get_status_url()
 
-        if not status_url or "DEIN-PROJEKT" in status_url:
+        if not status_url or "YOUR_STATUS_URL" in status_url:
             raise RuntimeError(
-                "Bitte REPLIT_STATUS_URL oben in game.py eintragen."
+                "Bitte REPLIT_STATUS_URL in config.ini eintragen."
             )
 
         separator = "&" if "?" in status_url else "?"

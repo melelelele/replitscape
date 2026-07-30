@@ -2,3 +2,4 @@ build/
 .server-build/
 *.class
 .replit.nix
+.idea
