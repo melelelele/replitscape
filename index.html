@@ -88,7 +88,6 @@
             0 0 45px rgba(243, 199, 127, 0.20);
         }
     </style>
-    ```
 
 </head>
 <body class="theme-coffee">
@@ -105,7 +104,6 @@
             <div class="scene"></div>
         </section>
 
-        ```
         <section data-after-ready-delay="2" data-audio-1-phase="before-text"
                  data-audio-1-src="sounds/kaffee.mp3" data-audio-1-volume="0.72"
                  data-audio-1-blocking="true"
@@ -194,10 +192,10 @@
                  data-audio-2-type="tts"
                  data-audio-2-voice="de-DE-ConradNeural"
                  data-avatar="pics/nullpointer.png"
-                 data-dialogue=" Eine Kaffeemaschine braucht Zugriff auf eine Kaffeedose, nicht auf eine Teedose."
+                 data-dialogue="Eine Teekanne lässt sich nicht durch gute Absichten zur Kaffeemaschine machen. Das Küchen-Setup erzeugt schlicht das falsche Gerät."
                  data-layout="dialogue" data-side="right"
                  data-speaker="PROFESSOR NULLPOINTER"
-                 data-task="Öffne src/Kaffeedose.java. Implementiere entnehmen(), sodass die gespeicherten Kaffeebohnen zurückgegeben werden."
+                 data-task="Öffne src/KuechenSetup.java. Initialisiere eine Kaffeemaschine mit Kaffeedose, Mahlwerk, Wassererhitzer und Milchaufschäumer."
                  data-wait-for-task="true" data-wait-key="q1">
             <div class="scene"></div>
         </section>
@@ -215,7 +213,7 @@
                  data-audio-3-voice="de-DE-ConradNeural"
                  data-avatar="pics/coffee-happy.png"
                  data-cscape-check="check_q1_done"
-                 data-dialogue="Kaffeedose erreichbar. Ich habe Kaffeebohnen gefunden. Ich gieße jetzt das heiße Wasser darüber."
+                 data-dialogue="Neustart abgeschlossen. Gerätetyp: Kaffeemaschine. Kaffeedose verbunden. Mahlwerk verbunden. Wassererhitzer verbunden. Milchaufschäumer verbunden. Starte Systemdiagnose."
                  data-layout="dialogue" data-side="left"
                  data-speaker="KAFFEEMASCHINE">
             <div class="scene"></div>
@@ -229,7 +227,7 @@
                  data-audio-2-text-from="dialogue" data-audio-2-type="tts"
                  data-audio-2-voice="de-DE-ConradNeural"
                  data-avatar="pics/coffee.png"
-                 data-dialogue="Versuch abgeschlossen. Aber in der Tasse schwimmen ganze Bohnen..."
+                 data-dialogue="Kaffeedose erkannt. Entnahmevorgang gestartet. Rückgabewert: null. Die Bohnen sind da, aber offenbar weigert sich die Dose, sie herauszugeben."
                  data-layout="dialogue" data-side="left"
                  data-speaker="KAFFEEMASCHINE">
             <div class="scene"></div>
@@ -243,7 +241,7 @@
                  data-audio-2-text-from="dialogue" data-audio-2-type="tts"
                  data-audio-2-voice="de-DE-KatjaNeural"
                  data-avatar="pics/luna.png"
-                 data-dialogue="Vielleicht besitzen die Bohnen einfach gern ihre natürliche Form. Wir sollten uns alle nicht in eine Form pressen lassen, nur damit wir geliebt werden."
+                 data-dialogue="Vielleicht hält die Dose nur fest, was ihr wichtig ist. Besitz ist schließlich auch eine Form von Bindung."
                  data-layout="dialogue" data-side="right"
                  data-speaker="LUNA MONDSCHEIN">
             <div class="scene"></div>
@@ -257,11 +255,55 @@
                  data-audio-2-text-from="dialogue" data-audio-2-type="tts"
                  data-audio-2-voice="de-DE-ConradNeural"
                  data-avatar="pics/nullpointer.png"
-                 data-dialogue="Die Bohnen brauchen keine Selbstverwirklichung. Sie brauchen ein Mahlwerk."
+                 data-dialogue="Die Bohnen brauchen keine Bindungstheorie. Sie müssen erst einmal aus der Dose herauskommen."
                  data-layout="dialogue" data-side="left"
                  data-speaker="PROFESSOR NULLPOINTER"
-                 data-task="Öffne src/Mahlwerk.java. Erzeuge aus den Kaffeebohnen ein GemahlenerKaffee-Objekt und gib es zurück."
+                 data-task="Öffne src/Kaffeedose.java. Implementiere entnehmen(), sodass die gespeicherten Kaffeebohnen zurückgegeben werden."
                  data-wait-for-task="true" data-wait-key="q2">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/kaffee.mp3"
+                 data-audio-1-volume="0.72"
+                 data-audio-1-blocking="true"
+                 data-audio-2-phase="before-text"
+                 data-audio-2-src="sounds/coffee-machine.mp3"
+                 data-audio-2-type="sound"
+                 data-audio-2-volume="0.70"
+                 data-audio-2-blocking="true"
+                 data-audio-3-phase="start"
+                 data-audio-3-pitch="+25Hz"
+                 data-audio-3-rate="+8%"
+                 data-audio-3-volume="0.82"
+                 data-audio-3-text-from="dialogue"
+                 data-audio-3-type="tts"
+                 data-audio-3-voice="de-DE-ConradNeural"
+                 data-avatar="pics/coffee-happy.png"
+                 data-cscape-check="check_q2_done"
+                 data-dialogue="Kaffeebohnen erfolgreich entnommen. Ich starte einen Espressoversuch ..."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="KAFFEEMASCHINE">
+            <div class="scene"></div>
+        </section>
+
+        <section data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/kaffee.mp3"
+                 data-audio-1-volume="0.72"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="+25Hz"
+                 data-audio-2-rate="+8%"
+                 data-audio-2-volume="0.82"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/coffee.png"
+                 data-dialogue="Versuch abgeschlossen. Aber in der Tasse schwimmen ganze Bohnen. Das ist technisch gesehen ein Getränk, nur leider kein gutes."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="KAFFEEMASCHINE"
+                 data-task="Öffne src/Mahlwerk.java. Erzeuge aus den Kaffeebohnen ein GemahlenerKaffee-Objekt und gib es zurück."
+                 data-wait-for-task="true" data-wait-key="q3">
             <div class="scene"></div>
         </section>
 
@@ -283,52 +325,8 @@
                  data-audio-3-type="tts"
                  data-audio-3-voice="de-DE-ConradNeural"
                  data-avatar="pics/coffee-happy.png"
-                 data-cscape-check="check_q2_done"
-                 data-dialogue="Das Mahlwerk funktioniert. Die Bohnen haben ihre natürliche Form verloren und riechen jetzt auch erstaunlich überzeugend."
-                 data-layout="dialogue" data-side="right"
-                 data-speaker="KAFFEEMASCHINE">
-            <div class="scene"></div>
-        </section>
-
-        <section data-audio-1-phase="before-text"
-                 data-audio-1-src="sounds/kaffee.mp3"
-                 data-audio-1-volume="0.72"
-                 data-audio-2-phase="start"
-                 data-audio-2-pitch="+25Hz"
-                 data-audio-2-rate="+8%"
-                 data-audio-2-volume="0.82"
-                 data-audio-2-text-from="dialogue"
-                 data-audio-2-type="tts"
-                 data-audio-2-voice="de-DE-ConradNeural"
-                 data-avatar="pics/coffee.png"
-                 data-dialogue="Kaffeedose, Mahlwerk und Wassererhitzer sind bereit. Trotzdem kann ich noch keinen Espresso herstellen."
-                 data-layout="dialogue" data-side="right"
-                 data-speaker="KAFFEEMASCHINE"
-                 data-task="Öffne src/Kaffeemaschine.java. Implementiere espresso() mit Kaffeedose, Mahlwerk und Wassererhitzer."
-                 data-wait-for-task="true" data-wait-key="q3">
-            <div class="scene"></div>
-        </section>
-
-        <section data-after-ready-delay="2"
-                 data-audio-1-phase="before-text"
-                 data-audio-1-src="sounds/kaffee.mp3"
-                 data-audio-1-volume="0.72"
-                 data-audio-1-blocking="true"
-                 data-audio-2-phase="before-text"
-                 data-audio-2-src="sounds/coffee-machine-full.mp3"
-                 data-audio-2-type="sound"
-                 data-audio-2-volume="0.70"
-                 data-audio-2-blocking="true"
-                 data-audio-3-phase="start"
-                 data-audio-3-pitch="+25Hz"
-                 data-audio-3-rate="+8%"
-                 data-audio-3-volume="0.82"
-                 data-audio-3-text-from="dialogue"
-                 data-audio-3-type="tts"
-                 data-audio-3-voice="de-DE-ConradNeural"
-                 data-avatar="pics/coffee-happy.png"
                  data-cscape-check="check_q3_done"
-                 data-dialogue="Espresso erfolgreich hergestellt. Habe ich das wirklich gemacht? Ich glaube, ich bin tatsächlich eine Kaffeemaschine."
+                 data-dialogue="Das Mahlwerk funktioniert. Die Bohnen haben ihre natürliche Form verloren und riechen jetzt auch erstaunlich überzeugend. Wasserdiagnose: 100 °C. Der Wassererhitzer läuft noch im Teemodus."
                  data-layout="dialogue" data-side="left"
                  data-speaker="KAFFEEMASCHINE">
             <div class="scene"></div>
@@ -345,9 +343,68 @@
                  data-audio-2-type="tts"
                  data-audio-2-voice="de-DE-ConradNeural"
                  data-avatar="pics/nullpointer.png"
-                 data-dialogue="Endlich. Ein Espresso. Das System lebt. Jetzt bin ich schon wieder eingeschränkt zurechnungsfähig."
+                 data-dialogue="Der Wassererhitzer ist nicht kaputt, nur falsch kalibriert. Für Kamillentee waren 100 Grad in Ordnung. Für Espresso stellen wir ihn auf 93 Grad."
                  data-layout="dialogue" data-side="right"
-                 data-speaker="PROFESSOR NULLPOINTER">
+                 data-speaker="PROFESSOR NULLPOINTER"
+                  data-task="Öffne src/Wassererhitzer.java. Stelle die ZIELTEMPERATUR von 100 °C auf 93 °C."
+                  data-wait-for-task="true"
+                  data-wait-key="q4">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/luna.mp3"
+                 data-audio-1-volume="0.70"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="+17Hz"
+                 data-audio-2-rate="+12%"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-KatjaNeural"
+                 data-avatar="pics/luna.png"
+                 data-dialogue="Siehst du? Das Wasser musste nicht kochen, um seinen Zweck zu erfüllen. Manchmal reichen auch 93 Grad."
+                 data-layout="dialogue" data-side="left"
+                 data-speaker="LUNA MONDSCHEIN"
+                  data-cscape-check="check_q4_done">
+            <div class="scene"></div>
+        </section>
+
+        <section data-after-ready-delay="2"
+                 data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/professor.mp3"
+                 data-audio-1-volume="0.75"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="-4Hz"
+                 data-audio-2-rate="+38%"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/nullpointer.png"
+                 data-dialogue="Bitte keine thermodynamische Selbstfindung. Kaffeedose, Mahlwerk und Wassererhitzer sind bereit. Jetzt muss die Maschine sie nur noch gemeinsam verwenden."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="PROFESSOR NULLPOINTER"
+                  data-task="Öffne src/Kaffeemaschine.java. Implementiere espresso() mit Kaffeedose, Mahlwerk und Wassererhitzer."
+                  data-wait-for-task="true"
+                  data-wait-key="q5">
+            <div class="scene"></div>
+        </section>
+
+        <section data-audio-1-phase="before-text"
+                 data-audio-1-src="sounds/kaffee.mp3"
+                 data-audio-1-volume="0.72"
+                 data-audio-2-phase="start"
+                 data-audio-2-pitch="+25Hz"
+                 data-audio-2-rate="+8%"
+                 data-audio-2-volume="0.82"
+                 data-audio-2-text-from="dialogue"
+                 data-audio-2-type="tts"
+                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-avatar="pics/coffee.png"
+                 data-dialogue="Espresso erfolgreich hergestellt. Habe ich das wirklich gemacht? Ich glaube, ich bin tatsächlich eine Kaffeemaschine."
+                 data-layout="dialogue" data-side="right"
+                 data-speaker="KAFFEEMASCHINE"
+                  data-cscape-check="check_q5_done">
             <div class="scene"></div>
         </section>
 
@@ -368,60 +425,6 @@
             <div class="scene"></div>
         </section>
 
-        <section data-after-ready-delay="2"
-                 data-audio-1-phase="before-text"
-                 data-audio-1-src="sounds/professor.mp3"
-                 data-audio-1-volume="0.75"
-                 data-audio-2-phase="start"
-                 data-audio-2-pitch="-4Hz"
-                 data-audio-2-rate="+38%"
-                 data-audio-2-text-from="dialogue"
-                 data-audio-2-type="tts"
-                 data-audio-2-voice="de-DE-ConradNeural"
-                 data-avatar="pics/nullpointer.png"
-                 data-dialogue="Wenn ich anmerken darf, ich bin zwar kein Physik-Professor, aber die Milch in Ihrer Tasse wiegt aufgeschäumt noch genauso viel."
-                 data-layout="dialogue" data-side="right"
-                 data-speaker="PROFESSOR NULLPOINTER">
-            <div class="scene"></div>
-        </section>
-
-        <section data-audio-1-phase="before-text"
-                 data-audio-1-src="sounds/kaffee.mp3"
-                 data-audio-1-volume="0.72"
-                 data-audio-2-phase="start"
-                 data-audio-2-pitch="+25Hz"
-                 data-audio-2-rate="+8%"
-                 data-audio-2-volume="0.82"
-                 data-audio-2-text-from="dialogue"
-                 data-audio-2-type="tts"
-                 data-audio-2-voice="de-DE-ConradNeural"
-                 data-avatar="pics/coffee.png"
-                 data-dialogue="Mein Milchaufschäumer ist verbunden, aber er produziert noch keinen Milchschaum."
-                 data-layout="dialogue" data-side="right"
-                 data-speaker="KAFFEEMASCHINE"
-                 data-task="Öffne src/Milchaufschaeumer.java. Erwärme die Milch auf 65 °C, erzeuge daraus Milchschaum und gib ihn zurück."
-                 data-wait-for-task="true" data-wait-key="q4">
-            <div class="scene"></div>
-        </section>
-
-        <section data-after-ready-delay="2"
-                 data-audio-1-phase="before-text"
-                 data-audio-1-src="sounds/luna.mp3"
-                 data-audio-1-volume="0.70"
-                 data-audio-2-phase="start"
-                 data-audio-2-pitch="+17Hz"
-                 data-audio-2-rate="+12%"
-                 data-audio-2-text-from="dialogue"
-                 data-audio-2-type="tts"
-                 data-audio-2-voice="de-DE-KatjaNeural"
-                 data-avatar="pics/luna.png"
-                 data-cscape-check="check_q4_done"
-                 data-dialogue="Siehst du? Die Milch musste nur Luft und Raum in ihr Leben lassen."
-                 data-layout="dialogue" data-side="left"
-                 data-speaker="LUNA MONDSCHEIN">
-            <div class="scene"></div>
-        </section>
-
         <section data-audio-1-phase="before-text"
                  data-audio-1-src="sounds/professor.mp3"
                  data-audio-1-volume="0.75"
@@ -432,11 +435,11 @@
                  data-audio-2-type="tts"
                  data-audio-2-voice="de-DE-ConradNeural"
                  data-avatar="pics/nullpointer.png"
-                 data-dialogue="Bitte nicht weiter analysieren, ich habe genug. Jetzt fehlt nur noch der Cappuccino."
+                 data-dialogue="Der Milchaufschäumer ist verbunden, aber die Methode liefert null. Frau Mondschein, die Milch braucht keine Luft und Raum, sondern eine Implementierung."
                  data-layout="dialogue" data-side="right"
                  data-speaker="PROFESSOR NULLPOINTER"
-                 data-task="Öffne src/Kaffeemaschine.java. Implementiere cappuccino() aus Espresso und Milchschaum."
-                 data-wait-for-task="true" data-wait-key="q5">
+                 data-task="Öffne src/Milchaufschaeumer.java. Erwärme die Milch auf 65 °C, erzeuge daraus Milchschaum und gib ihn zurück."
+                 data-wait-for-task="true" data-wait-key="q6">
             <div class="scene"></div>
         </section>
 
@@ -458,8 +461,8 @@
                  data-audio-3-type="tts"
                  data-audio-3-voice="de-DE-ConradNeural"
                  data-avatar="pics/coffee-happy.png"
-                 data-cscape-check="check_q5_done"
-                 data-dialogue="Cappuccino erfolgreich hergestellt. Espresso und Cappuccino funktionieren. Keines der Getränke enthält Kamille. Das ist gut."
+                 data-cscape-check="check_q6_done"
+                 data-dialogue="Milchschaum erfolgreich hergestellt. Die Milch hat Luft und Raum in ihr Leben gelassen. Professor Nullpointer wirkt trotzdem nicht überzeugt."
                  data-layout="dialogue" data-side="left"
                  data-speaker="KAFFEEMASCHINE">
             <div class="scene"></div>
@@ -477,7 +480,7 @@
                  data-audio-2-type="tts"
                  data-audio-2-voice="de-DE-ConradNeural"
                  data-avatar="pics/coffee.png"
-                 data-dialogue="Meine Funktionen sind repariert. Beim nächsten Neustart werde ich jedoch weiterhin als Teekanne initialisiert."
+                 data-dialogue="Espresso funktioniert. Milchschaum funktioniert. Beim Cappuccino endet die Zubereitung trotzdem mit null. Offenbar muss ich beides noch zusammenführen."
                  data-layout="dialogue" data-side="right"
                  data-speaker="KAFFEEMASCHINE">
             <div class="scene"></div>
@@ -493,11 +496,11 @@
                  data-audio-2-type="tts"
                  data-audio-2-voice="de-DE-ConradNeural"
                  data-avatar="pics/nullpointer.png"
-                 data-dialogue="Das Küchen-Setup muss jetzt endgültig repariert werden."
+                 data-dialogue="Jetzt fehlt nur noch der Cappuccino. Und bitte sagen Sie mir nicht, Espresso und Milchschaum müssten erst zueinanderfinden."
                  data-layout="dialogue" data-side="right"
                  data-speaker="PROFESSOR NULLPOINTER"
-                 data-task="Öffne src/KuechenSetup.java. Initialisiere eine Kaffeemaschine mit Kaffeedose, Mahlwerk, Wassererhitzer und Milchaufschäumer."
-                 data-wait-for-task="true" data-wait-key="q6">
+                 data-task="Öffne src/Kaffeemaschine.java. Implementiere cappuccino() aus Espresso und Milchschaum."
+                 data-wait-for-task="true" data-wait-key="q7">
             <div class="scene"></div>
         </section>
 
@@ -513,8 +516,8 @@
                  data-audio-2-type="tts"
                  data-audio-2-voice="de-DE-ConradNeural"
                  data-avatar="pics/coffee-happy.png"
-                 data-cscape-check="check_q6_done"
-                 data-dialogue="Neustart abgeschlossen. Gerätetyp: Kaffeemaschine. Kaffeedose verbunden. Mahlwerk verbunden. Wassererhitzer verbunden. Milchaufschäumer verbunden."
+                 data-cscape-check="check_q7_done"
+                 data-dialogue="Cappuccino erfolgreich hergestellt. Espresso und Cappuccino funktionieren. Keines der Getränke enthält Kamille. Das ist gut."
                  data-layout="dialogue" data-side="left"
                  data-speaker="KAFFEEMASCHINE">
             <div class="scene scene-final"></div>
@@ -608,7 +611,6 @@
             <div class="scene scene-final"></div>
         </section>
     </div>
-    ```
 
 </div>
 
