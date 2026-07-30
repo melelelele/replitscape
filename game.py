@@ -15,7 +15,16 @@ class Game:
 
     REPLIT_STATUS_URL = config["replit"]["status_url"]
 
-    STATUS_KEYS = ("q1", "q2", "q3", "q4", "q5", "q6", "all")
+    STATUS_KEYS = (
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "all",
+    )
 
     def get_status_url(self):
         url = str(self.REPLIT_STATUS_URL or "").strip()
@@ -104,6 +113,9 @@ class Game:
 
     def check_q6_done(self):
         return self.safe_check("q6")
+
+    def check_q7_done(self):
+        return self.safe_check("q7")
 
     def check_all_done(self):
         return self.safe_check("all")
