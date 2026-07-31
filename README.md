@@ -416,11 +416,7 @@ http://localhost:8765
 http://localhost:5000
 ```
 
-Die `game.py` startet außerdem eine lokale Status-Bridge unter:
 
-```text
-http://127.0.0.1:5001/status
-```
 
 Diese lokale URL wird von der `index.html` verwendet. Die öffentliche Replit-URL muss deshalb nur einmal in der `game.py` eingetragen werden.
 
@@ -473,8 +469,8 @@ Diese lokale URL wird von der `index.html` verwendet. Die öffentliche Replit-UR
 Die Statuskette besteht aus drei Stufen:
 
 1. Der Java-Server in Replit kompiliert und testet das Projekt.
-2. Die `game.py` ruft die öffentliche Replit-URL ab und stellt das Ergebnis lokal unter Port `5001` bereit.
-3. Die `index.html` fragt die lokale Status-Bridge ab und wartet auf Aufgabenfolien auf den jeweiligen Schlüssel `q1` bis `q6`.
+2. Die `game.py` ruft die öffentliche Replit-URL ab und gibt wie gewohnt weiter, ob die Aufgabe schon gelöst ist.
+3. Die `index.html` wartet auf Aufgabenfolien auf den jeweiligen Schlüssel `q1` bis `q6`.
 
 Die Replit-URL steht dadurch nicht in der `index.html`. Sie wird ausschließlich in der `game.py` gepflegt.
 
