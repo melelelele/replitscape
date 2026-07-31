@@ -195,8 +195,7 @@
                  data-dialogue="Eine Teekanne lässt sich nicht durch gute Absichten zur Kaffeemaschine machen. Das Küchen-Setup erzeugt schlicht das falsche Gerät."
                  data-layout="dialogue" data-side="right"
                  data-speaker="PROFESSOR NULLPOINTER"
-                 data-task="Öffne src/KuechenSetup.java. Initialisiere eine Kaffeemaschine mit Kaffeedose, Mahlwerk, Wassererhitzer und Milchaufschäumer."
-                 data-wait-for-task="true" data-wait-key="q1">
+                 data-task="Öffne src/KuechenSetup.java. Initialisiere eine Kaffeemaschine mit Kaffeedose, Mahlwerk, Wassererhitzer und Milchaufschäumer.">
             <div class="scene"></div>
         </section>
 
@@ -258,8 +257,7 @@
                  data-dialogue="Die Bohnen brauchen keine Bindungstheorie. Sie müssen erst einmal aus der Dose herauskommen."
                  data-layout="dialogue" data-side="left"
                  data-speaker="PROFESSOR NULLPOINTER"
-                 data-task="Öffne src/Kaffeedose.java. Implementiere entnehmen(), sodass die gespeicherten Kaffeebohnen zurückgegeben werden."
-                 data-wait-for-task="true" data-wait-key="q2">
+                 data-task="Öffne src/Kaffeedose.java. Implementiere entnehmen(), sodass die gespeicherten Kaffeebohnen zurückgegeben werden.">
             <div class="scene"></div>
         </section>
 
@@ -302,8 +300,7 @@
                  data-dialogue="Versuch abgeschlossen. Aber in der Tasse schwimmen ganze Bohnen. Das ist technisch gesehen ein Getränk, nur leider kein gutes."
                  data-layout="dialogue" data-side="right"
                  data-speaker="KAFFEEMASCHINE"
-                 data-task="Öffne src/Mahlwerk.java. Erzeuge aus den Kaffeebohnen ein GemahlenerKaffee-Objekt und gib es zurück."
-                 data-wait-for-task="true" data-wait-key="q3">
+                 data-task="Öffne src/Mahlwerk.java. Erzeuge aus den Kaffeebohnen ein GemahlenerKaffee-Objekt und gib es zurück.">
             <div class="scene"></div>
         </section>
 
@@ -346,9 +343,7 @@
                  data-dialogue="Der Wassererhitzer ist nicht kaputt, nur falsch kalibriert. Für Kamillentee waren 100 Grad in Ordnung. Für Espresso stellen wir ihn auf 93 Grad."
                  data-layout="dialogue" data-side="right"
                  data-speaker="PROFESSOR NULLPOINTER"
-                  data-task="Öffne src/Wassererhitzer.java. Stelle die ZIELTEMPERATUR von 100 °C auf 93 °C."
-                  data-wait-for-task="true"
-                  data-wait-key="q4">
+                  data-task="Öffne src/Wassererhitzer.java. Stelle die ZIELTEMPERATUR von 100 °C auf 93 °C.">
             <div class="scene"></div>
         </section>
 
@@ -384,9 +379,7 @@
                  data-dialogue="Bitte keine thermodynamische Selbstfindung. Kaffeedose, Mahlwerk und Wassererhitzer sind bereit. Jetzt muss die Maschine sie nur noch gemeinsam verwenden."
                  data-layout="dialogue" data-side="right"
                  data-speaker="PROFESSOR NULLPOINTER"
-                  data-task="Öffne src/Kaffeemaschine.java. Implementiere espresso() mit Kaffeedose, Mahlwerk und Wassererhitzer."
-                  data-wait-for-task="true"
-                  data-wait-key="q5">
+                  data-task="Öffne src/Kaffeemaschine.java. Implementiere espresso() mit Kaffeedose, Mahlwerk und Wassererhitzer.">
             <div class="scene"></div>
         </section>
 
@@ -438,8 +431,7 @@
                  data-dialogue="Der Milchaufschäumer ist verbunden, aber die Methode liefert null. Frau Mondschein, die Milch braucht keine Luft und Raum, sondern eine Implementierung."
                  data-layout="dialogue" data-side="right"
                  data-speaker="PROFESSOR NULLPOINTER"
-                 data-task="Öffne src/Milchaufschaeumer.java. Erwärme die Milch auf 65 °C, erzeuge daraus Milchschaum und gib ihn zurück."
-                 data-wait-for-task="true" data-wait-key="q6">
+                 data-task="Öffne src/Milchaufschaeumer.java. Erwärme die Milch auf 65 °C, erzeuge daraus Milchschaum und gib ihn zurück.">
             <div class="scene"></div>
         </section>
 
@@ -499,8 +491,7 @@
                  data-dialogue="Jetzt fehlt nur noch der Cappuccino. Und bitte sagen Sie mir nicht, Espresso und Milchschaum müssten erst zueinanderfinden."
                  data-layout="dialogue" data-side="right"
                  data-speaker="PROFESSOR NULLPOINTER"
-                 data-task="Öffne src/Kaffeemaschine.java. Implementiere cappuccino() aus Espresso und Milchschaum."
-                 data-wait-for-task="true" data-wait-key="q7">
+                 data-task="Öffne src/Kaffeemaschine.java. Implementiere cappuccino() aus Espresso und Milchschaum.">
             <div class="scene"></div>
         </section>
 
@@ -648,111 +639,31 @@
 <script src="story-styles/cscape-story.js"></script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-        window.CSCAPE_STORY_API.init();
+    document.addEventListener(
+        "DOMContentLoaded",
+        () => {
+            window.CSCAPE_STORY_API.init();
 
-        await Reveal.initialize({
-            hash: false,
-            controls: false,
-            progress: false,
-            transition: "none",
-            center: false,
+            Reveal.initialize({
+                hash: false,
+                controls: false,
+                progress: false,
+                transition: "none",
+                center: false,
 
-            keyboard: false,
-            touch: false,
-            mouseWheel: false,
+                keyboard: {
+                    27: () => alert(
+                        "Close with Ctrl+W"
+                    ),
+                    83: null
+                },
 
-            plugins: [
-                RevealCscape
-            ]
-        });
-
-        const LOCAL_STATUS_URL = "http://127.0.0.1:5001/status";
-        const POLL_INTERVAL_MS = 3000;
-
-        let advancing = false;
-        let pollInProgress = false;
-
-        async function fetchJavaStatus() {
-            const separator = LOCAL_STATUS_URL.includes("?") ? "&" : "?";
-
-            const response = await fetch(
-                LOCAL_STATUS_URL + separator + "cachebust=" + Date.now(),
-                {
-                    cache: "no-store",
-                    headers: {
-                        "Cache-Control": "no-cache"
-                    }
-                }
-            );
-
-            if (!response.ok) {
-                throw new Error(
-                    `Status-Bridge antwortet mit HTTP ${response.status}`
-                );
-            }
-
-            const status = await response.json();
-
-            if (!status || typeof status !== "object") {
-                throw new Error(
-                    "Status-Bridge lieferte kein JSON-Objekt."
-                );
-            }
-
-            return status;
+                plugins: [
+                    RevealCscape
+                ]
+            });
         }
-
-        async function checkCurrentTask() {
-            if (advancing || pollInProgress) {
-                return;
-            }
-
-            const currentSlide = Reveal.getCurrentSlide();
-            const waitKey = currentSlide?.dataset?.waitKey;
-
-            if (!waitKey) {
-                return;
-            }
-
-            pollInProgress = true;
-
-            try {
-                const status = await fetchJavaStatus();
-
-                if (status[waitKey] === true) {
-                    advancing = true;
-
-                    window.setTimeout(() => {
-                        Reveal.next();
-                    }, 700);
-                }
-            } catch (error) {
-
-                console.warn(
-                    "[JavaScape] Aufgabenprüfung fehlgeschlagen:",
-                    error.message
-                );
-            } finally {
-                pollInProgress = false;
-            }
-        }
-
-        Reveal.on("slidechanged", () => {
-            advancing = false;
-            window.setTimeout(checkCurrentTask, 500);
-        });
-
-        window.setTimeout(checkCurrentTask, 700);
-        window.setInterval(checkCurrentTask, POLL_INTERVAL_MS);
-
-
-        document.addEventListener("keydown", event => {
-            if (event.key === "Escape") {
-                alert("Close with Ctrl+W");
-            }
-        });
-    });
+    );
 </script>
 
 </body>
