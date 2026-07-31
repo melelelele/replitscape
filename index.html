@@ -202,17 +202,13 @@
         <section data-after-ready-delay="2" data-audio-1-phase="before-text"
                  data-audio-1-src="sounds/kaffee.mp3"
                  data-audio-1-volume="0.72" data-audio-1-blocking="true"
-                 data-audio-2-phase="after-text"
-                 data-audio-2-src="sounds/coffee-machine.mp3"
-                 data-audio-2-type="sound" data-audio-2-volume="0.70"
-                 data-audio-2-blocking="true"
                  data-audio-3-phase="start" data-audio-3-pitch="+25Hz"
                  data-audio-3-rate="+8%" data-audio-3-volume="0.82"
                  data-audio-3-text-from="dialogue" data-audio-3-type="tts"
                  data-audio-3-voice="de-DE-ConradNeural"
                  data-avatar="pics/coffee-happy.png"
                  data-cscape-check="check_q1_done"
-                 data-dialogue="Neustart abgeschlossen. Gerätetyp: Kaffeemaschine. Kaffeedose verbunden. Mahlwerk verbunden. Wassererhitzer verbunden. Milchaufschäumer verbunden. Starte Systemdiagnose. Auweia, hier scheint einiges nicht ganz richtig zu sein..."
+                 data-dialogue="Führe Neustart durch... Neustart abgeschlossen. Gerätetyp: Kaffeemaschine. Kaffeedose verbunden. Mahlwerk verbunden. Wassererhitzer verbunden. Milchaufschäumer verbunden. Starte Systemdiagnose... Auweia, hier scheint einiges nicht ganz richtig zu sein..."
                  data-layout="dialogue" data-side="left"
                  data-speaker="KAFFEEMASCHINE">
             <div class="scene"></div>
@@ -266,10 +262,9 @@
                  data-audio-1-src="sounds/kaffee.mp3"
                  data-audio-1-volume="0.72"
                  data-audio-1-blocking="true"
-                 data-audio-2-phase="before-text"
+                 data-audio-2-phase="after-text"
                  data-audio-2-src="sounds/coffee-machine.mp3"
-                 data-audio-2-type="sound"
-                 data-audio-2-volume="0.70"
+                 data-audio-2-type="sound" data-audio-2-volume="0.70"
                  data-audio-2-blocking="true"
                  data-audio-3-phase="start"
                  data-audio-3-pitch="+25Hz"
@@ -308,7 +303,7 @@
                  data-audio-2-text-from="dialogue" data-audio-2-type="tts"
                  data-audio-2-voice="de-DE-KatjaNeural"
                  data-avatar="pics/luna.png"
-                 data-dialogue="Vielleicht besitzen die Bohnen einfach gern ihre natürliche Form. Wir sollten uns alle nicht in eine Form pressen lassen, nur damit wir geliebt werden."
+                 data-dialogue="Kaffeebohnen besitzen nunmal einfach von Natur aus diese Form. Identität lässt sich eben nicht einfach zermahlen."
                  data-layout="dialogue" data-side="right"
                  data-speaker="LUNA MONDSCHEIN">
             <div class="scene"></div>
@@ -384,12 +379,14 @@
                  data-audio-2-type="tts"
                  data-audio-2-voice="de-DE-KatjaNeural"
                  data-avatar="pics/luna.png"
+                 data-cscape-check="check_q4_done"
                  data-dialogue="Siehst du? Für Kamillentee sollte das Wasser kochen, aber für Espresso ist es sogar besser, wenn es etwas kühler ist. Manchmal sind die Dinge, die uns im ersten Moment als Schwäche vorkommen, unsere wertvollsten Eigenschaften!"
                  data-layout="dialogue" data-side="left"
-                 data-speaker="LUNA MONDSCHEIN"
-                  data-cscape-check="check_q4_done">
+                 data-speaker="LUNA MONDSCHEIN">
             <div class="scene"></div>
         </section>
+
+
 
         <section data-after-ready-delay="2"
                  data-audio-1-phase="before-text"
@@ -409,23 +406,28 @@
             <div class="scene"></div>
         </section>
 
-        <section data-audio-1-phase="before-text"
+        <section data-after-ready-delay="2"
                  data-audio-1-src="sounds/kaffee.mp3"
                  data-audio-1-volume="0.72"
-                 data-audio-2-phase="start"
-                 data-audio-2-pitch="+25Hz"
-                 data-audio-2-rate="+8%"
-                 data-audio-2-volume="0.82"
-                 data-audio-2-text-from="dialogue"
-                 data-audio-2-type="tts"
-                 data-audio-2-voice="de-DE-ConradNeural"
-                 data-avatar="pics/coffee.png"
+                 data-audio-2-phase="before-text"
+                 data-audio-2-src="sounds/coffee-machine-full.mp3 "
+                 data-audio-2-volume="0.72"
+                 data-audio-3-phase="start"
+                 data-audio-3-pitch="+25Hz"
+                 data-audio-3-rate="+8%"
+                 data-audio-3-volume="0.82"
+                 data-audio-3-text-from="dialogue"
+                 data-audio-3-type="tts"
+                 data-audio-3-voice="de-DE-ConradNeural"
+                 data-avatar="pics/coffee-happy.png"
+                 data-cscape-check="check_q5_done"
                  data-dialogue="Espresso erfolgreich hergestellt. Habe ich das wirklich gemacht? Ich glaube, ich bin tatsächlich eine Kaffeemaschine."
                  data-layout="dialogue" data-side="right"
-                 data-speaker="KAFFEEMASCHINE"
-                  data-cscape-check="check_q5_done">
+                 data-speaker="KAFFEEMASCHINE">
             <div class="scene"></div>
         </section>
+
+
         <section data-after-ready-delay="2"
                  data-audio-1-phase="before-text"
                  data-audio-1-src="sounds/professor.mp3"
@@ -442,6 +444,7 @@
                  data-speaker="PROFESSOR NULLPOINTER">
             <div class="scene"></div>
         </section>
+
 
 
         <section data-after-ready-delay="2"
@@ -505,7 +508,7 @@
                  data-audio-2-voice="de-DE-KatjaNeural"
                  data-avatar="pics/luna.png"
                  data-cscape-check="check_q6_done"
-                 data-dialogue="Siehst du? Die Milch musste nur Luft und Raum in ihr Leben lassen."
+                 data-dialogue="Siehst du? Die Milch muss nur Luft und Raum in ihr Leben lassen."
                  data-layout="dialogue" data-side="left"
                  data-speaker="LUNA MONDSCHEIN">
             <div class="scene"></div>
@@ -534,13 +537,16 @@
                  data-audio-1-phase="before-text"
                  data-audio-1-src="sounds/kaffee.mp3"
                  data-audio-1-volume="0.72"
-                 data-audio-2-phase="start"
-                 data-audio-2-pitch="+25Hz"
-                 data-audio-2-rate="+8%"
-                 data-audio-2-volume="0.82"
-                 data-audio-2-text-from="dialogue"
-                 data-audio-2-type="tts"
-                 data-audio-2-voice="de-DE-ConradNeural"
+                 data-audio-2-phase="before-text"
+                 data-audio-2-src="sounds/coffee-machine-full.mp3 "
+                 data-audio-2-volume="0.72"
+                 data-audio-3-phase="start"
+                 data-audio-3-pitch="+25Hz"
+                 data-audio-3-rate="+8%"
+                 data-audio-3-volume="0.82"
+                 data-audio-3-text-from="dialogue"
+                 data-audio-3-type="tts"
+                 data-audio-3-voice="de-DE-ConradNeural"
                  data-avatar="pics/coffee-happy.png"
                  data-cscape-check="check_q7_done"
                  data-dialogue="Cappuccino erfolgreich hergestellt. Espresso und Cappuccino funktionieren. Keines der Getränke enthält Kamille. Das ist gut."
@@ -561,7 +567,7 @@
                  data-audio-2-type="tts"
                  data-audio-2-voice="de-DE-ConradNeural"
                  data-avatar="pics/coffee-happy.png"
-                 data-dialogue="Initialisiere Neustart... Neustart abgeschlossen. Gerätetyp: Kaffeemaschine. Kaffeedose verbunden. Mahlwerk verbunden. Wassererhitzer verbunden. Milchaufschäumer verbunden."
+                 data-dialogue="Führe Neustart durch... Neustart abgeschlossen. Gerätetyp: Kaffeemaschine. Kaffeedose verbunden. Mahlwerk verbunden. Wassererhitzer verbunden. Milchaufschäumer verbunden."
                  data-layout="dialogue" data-side="right"
                  data-speaker="KAFFEEMASCHINE">
             <div class="scene scene-final"></div>
