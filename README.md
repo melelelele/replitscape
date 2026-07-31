@@ -67,13 +67,23 @@ Die Antwort sollte im ungelösten Startzustand ungefähr so aussehen:
   "q3": false,
   "q4": false,
   "q5": false,
-  "q6": false,
+  "q6": false, 
+  "q7": false, 
   "all": false,
   "errors": []
 }
 ```
 
-Diese vollständige `/status`-URL wird in der `game.py` des CScape-Projekts als `REPLIT_STATUS_URL` eingetragen.
+ie öffentliche URL wird anschließend in der `config.ini` des Cscape-Projekts eingetragen.
+
+Beispiel:
+
+```ini
+[replit]
+status_url = https://deine-app.replit.dev/status
+```
+
+Die `game.py` akzeptiert sowohl die vollständige `/status`-URL als auch die Basis-URL des Servers. Fehlt `/status`, wird der Pfad automatisch ergänzt.
 
 #### Wichtig
 
@@ -83,15 +93,38 @@ Verwende nicht die Editor-URL:
 https://replit.com/@user/projektname
 ```
 
-Verwende die öffentliche Web-URL des laufenden Servers mit angehängtem `/status`.
+Verwende die öffentliche Web-URL des laufenden Servers.
 
-Bei einem Kompilierungs- oder Laufzeitfehler bleiben die betroffenen Aufgaben auf `false`. Zusätzliche Hinweise stehen dann im Feld `errors`.
+Bei einem Kompilierungs-, Test- oder Laufzeitfehler bleiben die betroffenen Aufgaben auf `false`. Zusätzliche Hinweise stehen dann im Feld `errors`.
 
 ## Aufgaben für die Spielenden
 
-Die Spielenden bearbeiten ausschließlich die folgenden sechs Aufgabenstellen im Ordner `src/`.
+Die Spielenden bearbeiten ausschließlich die vorgesehenen Aufgabenstellen im Ordner `src/`.
 
-### Aufgabe 1: Kaffeebohnen entnehmen
+Die Aufgaben bauen aufeinander auf. Eine spätere Aufgabe wird erst als gelöst markiert, wenn auch ihre fachlichen Voraussetzungen erfüllt sind.
+
+## Aufgabe 1: Kaffeemaschine initialisieren
+
+Datei:
+
+```text
+src/KuechenSetup.java
+```
+
+Die Methode `initialisiereGeraet()` erzeugt im Startzustand eine funktionierende Teekanne.
+
+Diese Teekanne soll durch eine Kaffeemaschine ersetzt werden.
+
+Die Kaffeemaschine benötigt:
+
+* eine `Kaffeedose` mit Arabica-Kaffeebohnen,
+* ein `Mahlwerk`,
+* einen `Wassererhitzer`,
+* einen `Milchaufschaeumer`.
+
+Die einzelnen Komponenten sind zu diesem Zeitpunkt zwar verbunden, enthalten aber teilweise noch fehlerhafte oder unvollständige Implementierungen.
+
+## Aufgabe 2: Kaffeebohnen entnehmen
 
 Datei:
 
@@ -101,7 +134,9 @@ src/Kaffeedose.java
 
 Die Methode `entnehmen()` soll die im Feld `bohnen` gespeicherten Kaffeebohnen zurückgeben.
 
-### Aufgabe 2: Kaffeebohnen mahlen
+Im ungelösten Zustand liefert die Methode `null`. Die Bohnen befinden sich daher zwar in der Dose, können aber von der Kaffeemaschine nicht verwendet werden.
+
+## Aufgabe 3: Kaffeebohnen mahlen
 
 Datei:
 
@@ -111,7 +146,37 @@ src/Mahlwerk.java
 
 Die Methode `mahlen(...)` soll aus den übergebenen `Kaffeebohnen` ein neues `GemahlenerKaffee`-Objekt erzeugen und zurückgeben.
 
-### Aufgabe 3: Espresso zubereiten
+Das erzeugte Objekt soll sich auf die tatsächlich übergebenen Kaffeebohnen beziehen.
+
+## Aufgabe 4: Wassererhitzer kalibrieren
+
+Datei:
+
+```text
+src/Wassererhitzer.java
+```
+
+Der Wassererhitzer funktioniert bereits, ist aber noch für die ursprüngliche Teekanne kalibriert.
+
+Im Startzustand erhitzt er Wasser auf:
+
+```text
+100 °C
+```
+
+Für die Espressozubereitung soll die Zieltemperatur auf:
+
+```text
+93 °C
+```
+
+geändert werden.
+
+Dazu muss die Konstante `ZIELTEMPERATUR` angepasst werden.
+
+Diese Aufgabe ist innerhalb der Geschichte logisch: Die ursprüngliche Teekanne konnte mit 100 °C bereits Kamillentee zubereiten. Für Espresso benötigt die neue Kaffeemaschine jedoch eine andere Zieltemperatur.
+
+## Aufgabe 5: Espresso zubereiten
 
 Datei:
 
@@ -119,14 +184,19 @@ Datei:
 src/Kaffeemaschine.java
 ```
 
-Die Methode `espresso(...)` soll:
+Die Methode `espresso(...)` soll die bereits reparierten Komponenten gemeinsam verwenden.
+
+Dazu muss sie:
 
 1. Kaffeebohnen aus der Kaffeedose entnehmen,
 2. die Bohnen mit dem Mahlwerk mahlen,
-3. das Wasser mit dem Wassererhitzer erhitzen,
-4. aus gemahlenem Kaffee und heißem Wasser einen Espresso erzeugen.
+3. das Wasser mit dem Wassererhitzer auf 93 °C erhitzen,
+4. aus gemahlenem Kaffee und erhitztem Wasser einen Espresso erzeugen,
+5. den erzeugten Espresso zurückgeben.
 
-### Aufgabe 4: Milch aufschäumen
+Die vorhandene Methodensignatur und die bereits übergebenen Werte sollen beibehalten werden.
+
+## Aufgabe 6: Milch aufschäumen
 
 Datei:
 
@@ -134,9 +204,15 @@ Datei:
 src/Milchaufschaeumer.java
 ```
 
-Die Methode `aufschaeumen(...)` soll aus der übergebenen Milch ein neues `Milchschaum`-Objekt erzeugen und zurückgeben.
+Die Methode `aufschaeumen(...)` soll:
 
-### Aufgabe 5: Cappuccino zubereiten
+1. die übergebene Milch auf 65 °C erwärmen,
+2. aus der erwärmten Milch ein neues `Milchschaum`-Objekt erzeugen,
+3. den erzeugten Milchschaum zurückgeben.
+
+Der Milchschaum soll die tatsächlich übergebene und auf 65 °C erwärmte Milch enthalten.
+
+## Aufgabe 7: Cappuccino zubereiten
 
 Datei:
 
@@ -146,80 +222,105 @@ src/Kaffeemaschine.java
 
 Die Methode `cappuccino(...)` soll:
 
-1. mit `espresso(...)` einen Espresso zubereiten,
-2. die Milch mit dem Milchaufschäumer aufschäumen,
-3. aus Espresso und Milchschaum einen Cappuccino erzeugen.
+1. mit der bereits reparierten Espresso-Methode einen Espresso zubereiten,
+2. die übergebene Milch mit dem Milchaufschäumer aufschäumen,
+3. aus Espresso und Milchschaum einen Cappuccino erzeugen,
+4. den erzeugten Cappuccino zurückgeben.
 
-### Aufgabe 6: Kaffeemaschine initialisieren
-
-Datei:
-
-```text
-src/KuechenSetup.java
-```
-
-Die bisherige Teekanne soll durch eine vollständige Kaffeemaschine ersetzt werden. Die Kaffeemaschine benötigt:
-
-- eine `Kaffeedose` mit Arabica-Kaffeebohnen,
-- ein `Mahlwerk`,
-- einen `Wassererhitzer`,
-- einen `Milchaufschaeumer`.
-
-Der Wassererhitzer ist bereits korrekt implementiert. Das ist innerhalb der Geschichte logisch, weil das Gerät schon als Teekanne heißes Wasser erzeugen und Kamillentee kochen kann.
+Die Methode soll die bereits vorhandenen Komponenten und Methoden wiederverwenden, statt die einzelnen Verarbeitungsschritte unnötig zu duplizieren.
 
 ## Richtige Lösung
 
-> **Hinweis für die Spielleitung:** Dieser Abschnitt enthält die vollständigen Lösungen. Er sollte nicht in einer Version stehen, die die Spielenden einsehen können.
+> **Hinweis für die Spielleitung:** Dieser Abschnitt enthält die Lösungen. Er sollte nicht in einer Version stehen, die die Spielenden während des Escape Rooms einsehen können.
 
-### Aufgabe 1 – `Kaffeedose.entnehmen()`
+Die folgenden Ausschnitte zeigen die jeweils entscheidende Implementierung. Die vorhandenen Methodensignaturen, Parameternamen und Klassenstrukturen der Starterdateien sollen beibehalten werden.
 
-```java
-return bohnen;
-```
-
-### Aufgabe 2 – `Mahlwerk.mahlen(...)`
-
-```java
-return new GemahlenerKaffee(bohnen);
-```
-
-### Aufgabe 3 – `Kaffeemaschine.espresso(...)`
-
-```java
-Kaffeebohnen bohnen = kaffeedose.entnehmen();
-GemahlenerKaffee kaffee = mahlwerk.mahlen(bohnen);
-HeissesWasser heissesWasser = wassererhitzer.erhitzen(wasser);
-
-return new Espresso(kaffee, heissesWasser);
-```
-
-### Aufgabe 4 – `Milchaufschaeumer.aufschaeumen(...)`
-
-```java
-return new Milchschaum(milch);
-```
-
-### Aufgabe 5 – `Kaffeemaschine.cappuccino(...)`
-
-```java
-Espresso espresso = espresso(wasser);
-Milchschaum milchschaum = milchaufschaeumer.aufschaeumen(milch);
-
-return new Cappuccino(espresso, milchschaum);
-```
-
-### Aufgabe 6 – `KuechenSetup.initialisiereGeraet()`
+### Aufgabe 1 – `KuechenSetup.initialisiereGeraet()`
 
 ```java
 return new Kaffeemaschine(
-        new Kaffeedose(new Kaffeebohnen("Arabica")),
+        new Kaffeedose(
+                new Kaffeebohnen("Arabica")
+        ),
         new Mahlwerk(),
         new Wassererhitzer(),
         new Milchaufschaeumer()
 );
 ```
 
-Danach liefert `/status`:
+### Aufgabe 2 – `Kaffeedose.entnehmen()`
+
+```java
+return bohnen;
+```
+
+### Aufgabe 3 – `Mahlwerk.mahlen(...)`
+
+```java
+return new GemahlenerKaffee(bohnen);
+```
+
+### Aufgabe 4 – `Wassererhitzer`
+
+Die Zieltemperatur wird von 100 °C auf 93 °C geändert:
+
+```java
+private static final Temperatur ZIELTEMPERATUR =
+        new Temperatur(93);
+```
+
+Der übrige Code des Wassererhitzers bleibt unverändert.
+
+### Aufgabe 5 – `Kaffeemaschine.espresso(...)`
+
+Die vorhandenen Parameter- und Feldnamen können abhängig von der Starterdatei leicht abweichen. Der Ablauf entspricht folgendem Muster:
+
+```java
+Kaffeebohnen bohnen = kaffeedose.entnehmen();
+
+GemahlenerKaffee gemahlenerKaffee =
+        mahlwerk.mahlen(bohnen);
+
+Wasser erhitztesWasser =
+        wassererhitzer.erhitzen(wasser);
+
+return new Espresso(
+        gemahlenerKaffee,
+        erhitztesWasser
+);
+```
+
+### Aufgabe 6 – `Milchaufschaeumer.aufschaeumen(...)`
+
+Die Milch wird unter Verwendung der vorhandenen API mit einer Temperatur von 65 °C versehen. Anschließend wird daraus Milchschaum erzeugt.
+
+Sinngemäß:
+
+```java
+Milch erwaermteMilch = milch.mitTemperatur(
+        new Temperatur(65)
+);
+
+return new Milchschaum(erwaermteMilch);
+```
+
+Falls die Starterklasse für die Temperaturänderung einen anders benannten Konstruktor oder eine anders benannte Methode bereitstellt, ist die vorhandene API entsprechend zu verwenden. Entscheidend ist, dass der zurückgegebene Milchschaum Milch mit 65 °C enthält.
+
+### Aufgabe 7 – `Kaffeemaschine.cappuccino(...)`
+
+```java
+Espresso espresso = espresso(wasser);
+
+Milchschaum milchschaum =
+        milchaufschaeumer.aufschaeumen(milch);
+
+return new Cappuccino(
+        espresso,
+        milchschaum
+);
+```
+
+Nach dem vollständigen Lösen aller Aufgaben liefert `/status`:
 
 ```json
 {
@@ -229,12 +330,47 @@ Danach liefert `/status`:
   "q4": true,
   "q5": true,
   "q6": true,
+  "q7": true,
   "all": true,
   "errors": []
 }
 ```
 
-Die Tests sind aufeinander aufbauend. Eine spätere Aufgabe wird nur als gelöst markiert, wenn auch die vorherigen Voraussetzungen erfüllt sind.
+## Manuelle Prüfung in Replit
+
+Die Tests können zusätzlich direkt im Replit-Terminal ausgeführt werden:
+
+```bash
+./test.sh
+```
+
+Alternativ:
+
+```bash
+bash test.sh
+```
+
+Das Skript kompiliert die Java-Dateien gemeinsam mit `TestRunner.java` und gibt denselben JSON-Status aus wie der Endpunkt `/status`.
+
+Im ungelösten Startzustand ist folgende Ausgabe korrekt:
+
+```json
+{
+  "q1": false,
+  "q2": false,
+  "q3": false,
+  "q4": false,
+  "q5": false,
+  "q6": false,
+  "q7": false,
+  "all": false,
+  "errors": []
+}
+```
+
+`false` bedeutet in diesem Zustand nicht, dass die Tests fehlerhaft sind. Es bedeutet lediglich, dass die jeweilige Aufgabe noch nicht gelöst wurde.
+
+Das Feld `errors` sollte leer bleiben, solange das Projekt kompiliert und die Prüfungen ohne unerwartete Ausnahme ausgeführt werden können.
 
 ## Manuelle Prüfung in Replit
 
