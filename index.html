@@ -289,7 +289,7 @@
                  data-audio-2-text-from="dialogue" data-audio-2-type="tts"
                  data-audio-2-voice="de-DE-ConradNeural"
                  data-avatar="pics/coffee.png"
-                 data-dialogue="Versuch abgeschlossen. Aber in der Tasse schwimmen ganze Bohnen..."
+                 data-dialogue="Versuch abgeschlossen. Aber in der Tasse schwimmen ganze Bohnen... Das Mahlwerk funktioniert nicht richtig..."
                  data-layout="dialogue" data-side="left"
                  data-speaker="KAFFEEMASCHINE">
             <div class="scene"></div>
@@ -317,7 +317,7 @@
                  data-audio-2-text-from="dialogue" data-audio-2-type="tts"
                  data-audio-2-voice="de-DE-ConradNeural"
                  data-avatar="pics/nullpointer.png"
-                 data-dialogue="Die Bohnen brauchen keine Selbstverwirklichung. Sie brauchen ein Mahlwerk."
+                 data-dialogue="Die Bohnen brauchen keine Selbstverwirklichung. Sie brauchen ein funktionierendes Mahlwerk."
                  data-layout="dialogue" data-side="left"
                  data-speaker="PROFESSOR NULLPOINTER"
                  data-task="Öffne src/Mahlwerk.java. Erzeuge aus den Kaffeebohnen ein GemahlenerKaffee-Objekt und gib es zurück."
@@ -350,7 +350,8 @@
             <div class="scene"></div>
         </section>
 
-        <section data-after-ready-delay="2"
+
+        <section
                  data-audio-1-phase="before-text"
                  data-audio-1-src="sounds/professor.mp3"
                  data-audio-1-volume="0.75"
@@ -364,7 +365,8 @@
                  data-dialogue="Für Kamillentee waren 100 Grad in Ordnung. Für Espresso stellen wir den Wassererhitzer lieber auf 93 Grad."
                  data-layout="dialogue" data-side="right"
                  data-speaker="PROFESSOR NULLPOINTER"
-                  data-task="Öffne src/Wassererhitzer.java. Stelle die ZIELTEMPERATUR von 100 °C auf 93 °C.">
+                 data-wait-for-task="true"
+                 data-task="Öffne src/Wassererhitzer.java. Stelle die ZIELTEMPERATUR von 100 °C auf 93 °C.">
             <div class="scene"></div>
         </section>
 
@@ -388,7 +390,7 @@
 
 
 
-        <section data-after-ready-delay="2"
+        <section
                  data-audio-1-phase="before-text"
                  data-audio-1-src="sounds/professor.mp3"
                  data-audio-1-volume="0.75"
@@ -402,6 +404,7 @@
                  data-dialogue="Bitte keine thermodynamische Selbstfindung. Kaffeedose, Mahlwerk und Wassererhitzer sind bereit. Jetzt muss die Maschine sie nur noch gemeinsam verwenden."
                  data-layout="dialogue" data-side="right"
                  data-speaker="PROFESSOR NULLPOINTER"
+                 data-wait-for-task="true"
                   data-task="Öffne src/Kaffeemaschine.java. Implementiere espresso() mit Kaffeedose, Mahlwerk und Wassererhitzer.">
             <div class="scene"></div>
         </section>
@@ -493,6 +496,7 @@
                  data-dialogue="Der Milchaufschäumer ist verbunden,  aber er produziert noch keinen Milchschaum."
                  data-layout="dialogue" data-side="right"
                  data-speaker="PROFESSOR NULLPOINTER"
+                 data-wait-for-task="true"
                  data-task="Öffne src/Milchaufschaeumer.java. Erwärme die Milch auf 65 °C, erzeuge daraus Milchschaum und gib ihn zurück.">
             <div class="scene"></div>
         </section>
@@ -527,8 +531,8 @@
                  data-dialogue="Bitte nicht weiter analysieren, ich habe genug. Jetzt fehlt nur noch der Cappuccino."
                  data-layout="dialogue" data-side="right"
                  data-speaker="PROFESSOR NULLPOINTER"
+                 data-wait-for-task="true"
                  data-task="Öffne src/Kaffeemaschine.java. Implementiere cappuccino() aus Espresso und Milchschaum.">
-                 data-wait-for-task="true" >
             <div class="scene"></div>
         </section>
 
